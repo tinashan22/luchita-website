@@ -10,10 +10,13 @@ module.exports = {
       colors: {
         brandPurple: "#371f3b",
         brandLime: "#D2DD67",
+        brandCream: "#FAFFCF",
+        brandPink: "#F3E9FE",
       },
       fontFamily: {
         righteous: ["var(--font-righteous)"],
-        sans: ["var(--font-roboto)"],
+        roboto: ["var(--font-roboto)"],
+        garamond: ["var(--font-garamond)"],
       },
 
       backgroundImage: {

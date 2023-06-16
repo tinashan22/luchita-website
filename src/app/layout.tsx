@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Righteous, Roboto } from "next/font/google";
+import { EB_Garamond, Righteous, Roboto } from "next/font/google";
 
 const righteous = Righteous({
   weight: ["400"],
@@ -8,11 +8,19 @@ const righteous = Righteous({
 });
 
 const roboto = Roboto({
-  weight: ["400", "700"],
+  weight: ["400", "500", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-roboto",
+});
+
+const garamond = EB_Garamond({
+  weight: ["400", "500", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-garamond",
 });
 
 export const metadata = {
