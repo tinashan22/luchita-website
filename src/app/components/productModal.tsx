@@ -1,6 +1,6 @@
 import { Product } from "@/interfaces";
 import LargeButton from "./buttonLarge";
-import { ButtonType } from "@/constants";
+import { ButtonType, ProductType } from "@/constants";
 import Image from "next/image";
 import { Modal } from "react-overlays";
 import { stateLogger } from "@/stateLogger";
@@ -56,11 +56,6 @@ export default function ProductModal({
 
   return (
     <Backdrop onClick={handleCloseModal}>
-      {/* <Modal
-        className="fixed top-12 w-full z-10 flex justify-center items-center outline-none"
-        show={true}
-      > */}
-
       <motion.div
         onClick={(e) => e.stopPropagation()}
         className="m-auto "
@@ -69,7 +64,13 @@ export default function ProductModal({
         animate="visible"
         exit="exit"
       >
-        <div className="flex-col bg-brandCream w-[342px]  relative">
+        <div
+          style={{
+            WebkitMaskImage: "url(./modal-bg.svg)",
+            maskImage: "url(./modal-bg.svg)",
+          }}
+          className="flex-col bg-brandCream w-[342px]  relative"
+        >
           <div
             className="btn absolute right-0 z-20 text-xl px-4 "
             onClick={handleCloseModal}
@@ -88,10 +89,14 @@ export default function ProductModal({
           <div className="flex-col items-center px-4 pt-4 pb-10 text-brandPurple">
             <h2 className="font-roboto font-medium text-2xl">{product.name}</h2>
             <h4 className="font-garamond text-xl">${product.price}</h4>
-            <p className="font-garamond text-sm">
-              Earrings sold in pairs. All styles customizable. DM me
-              @lucha.luchita to customize in a color of your liking.
-            </p>
+            <p className="font-garamond text-sm">{product.description}</p>
+            {product.type === ProductType.Earrings && (
+              <p className="font-garamond text-sm">
+                <br />
+                Earrings sold in pairs. All styles customizable. DM me
+                @lucha.luchita to customize in a color of your liking.
+              </p>
+            )}
           </div>
           <div className="pb-10 px-8">
             <LargeButton
@@ -115,7 +120,6 @@ export default function ProductModal({
           </div>
         </div>
       </motion.div>
-      {/* </Modal> */}
     </Backdrop>
   );
 }
