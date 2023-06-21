@@ -56,30 +56,21 @@ const newProducts = [
 export default function ShopPage() {
   return (
     // page container
-    <div className="relative pt-20 px-5 w-full h-screen">
-      <div
-        style={{
-          backgroundSize: "cover",
-          backgroundImage: "url(/homepage-bg.png)",
-        }}
-        className="fixed top-0 left-0 w-full h-screen"
-      ></div>
-      {/* products grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-8  items-center">
+    <div className="relative pt-20 px-5 w-full ">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-8  items-center pb-16">
         {newProducts.map((p) => {
           return <ProductCard key={p.id} product={p} />;
         })}
       </div>
       {/* page bg */}
-
-      {/* <Image
+      <Image
         src="/homepage-bg.png"
         alt="home page bg"
-        className="min-h-screen fixed top-0 left-0 -z-10"
+        className="fixed top-0 left-0 -z-10"
         fill={true}
         draggable={false}
         priority
-      /> */}
+      />
     </div>
   );
 }

@@ -4,7 +4,9 @@ import Image from "next/image";
 import { Product } from "@/interfaces";
 import { useState } from "react";
 import { Modal } from "react-overlays";
-import ProductModalBody from "./productModalBody";
+import ProductModal from "./productModal";
+import { AnimatePresence, motion } from "framer-motion";
+import { framerLogger } from "@/stateLogger";
 
 export default function ProductCard({ product }: { product: Product }) {
   const [modalShow, setModalShow] = useState(false);
@@ -14,28 +16,29 @@ export default function ProductCard({ product }: { product: Product }) {
   }
 
   return (
-    <div>
-      {modalShow && (
-        <div
-          onClick={() => {
-            setModalShow(false);
-          }}
-          className="fixed top-0 left-0 w-screen h-screen z-10 bg-gray-500 bg-opacity-50 backdrop-blur-sm"
-        />
-      )}
-      <Modal
-        className="fixed top-16 w-full z-10 flex justify-center items-center"
-        show={modalShow}
+    <motion.div>
+      <AnimatePresence
+        // Disable any initial animations on children that
+        // are present when the component is first rendered
+        initial={false}
+        // Only render one component at a time.
+        // The exiting component will finish its exit
+        // animation before entering component is rendered
+        mode="wait"
+        // Fires when all exiting nodes have completed animating out
+        onExitComplete={() => {
+          framerLogger("product modal");
+        }}
       >
-        <div className="w-[342px]">
-          <ProductModalBody
+        {modalShow && (
+          <ProductModal
             product={product}
             handleCloseModal={() => {
               setModalShow(false);
             }}
           />
-        </div>
-      </Modal>
+        )}
+      </AnimatePresence>
 
       <div className="flex-col " onClick={handleClickProductCard}>
         <div className="relative w-full h-56  ">
@@ -53,6 +56,6 @@ export default function ProductCard({ product }: { product: Product }) {
           <p className="font-garamond text-lg">${product.price}</p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
