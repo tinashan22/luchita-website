@@ -1,5 +1,5 @@
 import { useEffect, PropsWithChildren, MouseEventHandler } from "react";
-import { stateLogger } from "../../stateLogger";
+import { stateLogger } from "../stateLogger";
 import { easeIn, motion } from "framer-motion";
 type BackdropProps = {
   onClick: MouseEventHandler<HTMLDivElement>;

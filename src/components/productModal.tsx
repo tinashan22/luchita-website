@@ -68,14 +68,20 @@ export default function ProductModal({
           style={{
             WebkitMaskImage: "url(./modal-bg.svg)",
             maskImage: "url(./modal-bg.svg)",
+            maskRepeat: "no-repeat",
           }}
-          className="flex-col bg-brandCream w-[342px]  relative"
+          className="flex-col bg-brandCream w-[342px] h-[662px] relative"
         >
           <div
-            className="btn absolute right-0 z-20 text-xl px-4 "
+            className="btn absolute right-3 top-3 z-20 text-xl "
             onClick={handleCloseModal}
           >
-            X
+            <Image
+              width={40}
+              height={40}
+              alt="close modal icon"
+              src="/close.svg"
+            />
           </div>
           <div className="relative w-full h-[337px]">
             <Image
@@ -86,37 +92,41 @@ export default function ProductModal({
               placeholder="empty"
             />
           </div>
-          <div className="flex-col items-center px-4 pt-4 pb-10 text-brandPurple">
-            <h2 className="font-roboto font-medium text-2xl">{product.name}</h2>
-            <h4 className="font-garamond text-xl">${product.price}</h4>
-            <p className="font-garamond text-sm">{product.description}</p>
-            {product.type === ProductType.Earrings && (
-              <p className="font-garamond text-sm">
-                <br />
-                Earrings sold in pairs. All styles customizable. DM me
-                @lucha.luchita to customize in a color of your liking.
-              </p>
-            )}
-          </div>
-          <div className="pb-10 px-8">
-            <LargeButton
-              key="primary"
-              type={ButtonType.LargePrimary}
-              btnText="Buy now"
-              handleClick={(e) => {
-                handleCloseModal(e);
-                alert("go to checkout");
-              }}
-            />
-            <div className="h-[12px]"></div>
-            <LargeButton
-              key="secondary"
-              type={ButtonType.LargeSecondary}
-              btnText="Add to Cart"
-              handleClick={() => {
-                alert("adding to cart");
-              }}
-            />
+          <div className="border mx-4 my-8 border-brandPurple rounded-[20px] overflow-y-scroll h-[270px]">
+            <div className="flex-col items-center px-4 pt-4 pb-10 text-brandPurple">
+              <h2 className="font-roboto font-medium text-2xl">
+                {product.name}
+              </h2>
+              <h4 className="font-garamond text-xl">${product.price}</h4>
+              {/* <p className="font-garamond text-sm">{product.description}</p> */}
+              {/* {product.type === ProductType.Earrings && (
+                <p className="font-garamond text-sm">
+                  <br />
+                  Earrings sold in pairs. All styles customizable. DM me
+                  @lucha.luchita to customize in a color of your liking.
+                </p>
+              )} */}
+            </div>
+            <div className="pb-10 px-4">
+              <LargeButton
+                key="primary"
+                type={ButtonType.LargePrimary}
+                btnText="Buy now"
+                handleClick={(e) => {
+                  handleCloseModal(e);
+                  alert("go to checkout");
+                }}
+              />
+              <div className="h-[12px]"></div>
+              <LargeButton
+                key="secondary"
+                type={ButtonType.LargeSecondary}
+                btnText="See more"
+                handleClick={() => {
+                  alert("adding to cart");
+                }}
+              />
+            </div>
           </div>
         </div>
       </motion.div>

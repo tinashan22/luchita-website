@@ -7,11 +7,12 @@ import { Modal } from "react-overlays";
 import ProductModal from "./productModal";
 import { AnimatePresence, motion } from "framer-motion";
 import { framerLogger } from "@/stateLogger";
+import preview from "../../public/preview.svg";
 
 export default function ProductCard({ product }: { product: Product }) {
   const [modalShow, setModalShow] = useState(false);
-  let clicked = 1;
-  function handleClickProductCard() {
+
+  function handleClickPreviewIcon() {
     setModalShow(true);
   }
 
@@ -40,7 +41,7 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
       </AnimatePresence>
 
-      <div className="flex-col " onClick={handleClickProductCard}>
+      <div className="flex-col ">
         <div className="relative w-full h-56  ">
           <Image
             src="/product.png"
@@ -48,13 +49,23 @@ export default function ProductCard({ product }: { product: Product }) {
             className="rounded-xl object-cover border border-brandPurple"
             fill={true}
             draggable={false}
-            priority
           />
         </div>
-        <div className="pl-1 pt-3">
-          <p className="font-roboto font-medium text-xs">{product.name}</p>
+        <div className="px-1 pt-3">
+          <div className=" flex flex-row justify-between">
+            <p className="font-roboto font-medium text-xs">{product.name}</p>
+            <Image
+              src={preview}
+              alt="preview product"
+              width={24}
+              draggable={false}
+              onClick={handleClickPreviewIcon}
+              priority
+            />
+          </div>
+
           <p className="font-garamond text-lg">${product.price}</p>
-          <p className="font-garamond text-xs">order: {product.displayOrder}</p>
+          {/* <p className="font-garamond text-xs">order: {product.displayOrder}</p> */}
         </div>
       </div>
     </motion.div>
