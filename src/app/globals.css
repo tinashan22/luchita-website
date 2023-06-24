@@ -26,6 +26,13 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.swiper {
+  border-radius: 12px;
+  border-color: rgb(55, 31, 59);
+  border-width: 1px;
+  overflow: hidden;
+}
+
 @media screen and (max-width: 480px) {
   .swiper-button-prev {
     display: none;
