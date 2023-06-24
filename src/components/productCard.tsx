@@ -2,17 +2,18 @@
 
 import Image from "next/image";
 import { Product } from "@/interfaces";
-import { useState } from "react";
-import { Modal } from "react-overlays";
+import { useState, MouseEvent } from "react";
 import ProductModal from "./productModal";
 import { AnimatePresence, motion } from "framer-motion";
 import { framerLogger } from "@/stateLogger";
 import preview from "../../public/preview.svg";
+import Link from "next/link";
 
 export default function ProductCard({ product }: { product: Product }) {
   const [modalShow, setModalShow] = useState(false);
 
-  function handleClickPreviewIcon() {
+  function handleClickPreviewIcon(e: MouseEvent) {
+    e.preventDefault();
     setModalShow(true);
   }
 
@@ -41,33 +42,35 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
       </AnimatePresence>
 
-      <div className="flex-col ">
-        <div className="relative w-full h-56  ">
-          <Image
-            src="/product.png"
-            alt="home page bg"
-            className="rounded-xl object-cover border border-brandPurple"
-            fill={true}
-            draggable={false}
-          />
-        </div>
-        <div className="px-1 pt-3">
-          <div className=" flex flex-row justify-between">
-            <p className="font-roboto font-medium text-xs">{product.name}</p>
+      <Link href={`/product/${product.id}`}>
+        <div className="flex-col ">
+          <div className="relative w-full h-56 md:h-[448px] ">
             <Image
-              src={preview}
-              alt="preview product"
-              width={24}
+              src="/product.png"
+              alt="home page bg"
+              className="rounded-xl object-cover border border-brandPurple"
+              fill={true}
               draggable={false}
-              onClick={handleClickPreviewIcon}
-              priority
             />
           </div>
+          <div className="px-1 pt-3">
+            <div className=" flex flex-row justify-between">
+              <p className="font-roboto font-medium text-xs">{product.name}</p>
+              <Image
+                src={preview}
+                alt="preview product icon"
+                width={24}
+                draggable={false}
+                onClick={(e) => handleClickPreviewIcon(e)}
+                priority
+              />
+            </div>
 
-          <p className="font-garamond text-lg">${product.price}</p>
-          {/* <p className="font-garamond text-xs">order: {product.displayOrder}</p> */}
+            <p className="font-garamond text-lg">${product.price}</p>
+            {/* <p className="font-garamond text-xs">order: {product.displayOrder}</p> */}
+          </div>
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 }

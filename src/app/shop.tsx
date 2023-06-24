@@ -5,6 +5,7 @@ import ProductCard from "../components/productCard";
 import { Product } from "@/interfaces";
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../firebase/firestore";
+import FloatingMenu from "@/components/floatingMenu";
 
 const mockProducts = [
   {

@@ -18,6 +18,9 @@ module.exports = {
         roboto: ["var(--font-roboto)"],
         garamond: ["var(--font-garamond)"],
       },
+      boxShadow: {
+        btn: "2px 4px 0 0",
+      },
 
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
