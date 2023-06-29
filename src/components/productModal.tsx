@@ -7,6 +7,7 @@ import { stateLogger } from "@/stateLogger";
 import { useEffect } from "react";
 import Backdrop from "./backdrop";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 type ProductModalProps = {
   handleCloseModal: (
@@ -118,14 +119,14 @@ export default function ProductModal({
                 }}
               />
               <div className="h-[12px]"></div>
-              <LargeButton
-                key="secondary"
-                type={ButtonType.LargeSecondary}
-                btnText="See more"
-                handleClick={() => {
-                  alert("adding to cart");
-                }}
-              />
+              <Link href={`/product/${product.id}`}>
+                <LargeButton
+                  key="secondary"
+                  type={ButtonType.LargeSecondary}
+                  btnText="See more"
+                  handleClick={() => {}}
+                />
+              </Link>
             </div>
           </div>
         </div>

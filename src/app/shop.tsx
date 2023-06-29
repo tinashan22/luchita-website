@@ -61,20 +61,27 @@ const mockProducts = [
 export default function ShopPage() {
   const [products, setProducts] = useState<any>([]);
 
-  // useEffect(() => {
-  //   getAllProducts().then((data: any) => {
-  //     const products = data.map((i: any) => i);
-  //     setProducts(products);
-  //   });
-  // });
+  useEffect(() => {
+    getAllProducts().then((data: any) => {
+      const products = data?.map((i: Product) => i);
+      setProducts(products);
+    });
+  });
   return (
     // page container
-    <div className="relative pt-20 px-5 w-full ">
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-8  items-center pb-16">
-        {mockProducts.map((p: Product) => {
-          return <ProductCard key={p.id} product={p} />;
-        })}
+    <div className="relative w-full flex justify-center  pt-8 px-5 md:px-20 md:pt-28 ">
+      <div className="max-w-[1352px] w-full  ">
+        {" "}
+        <div className=" grid grid-cols-2 md:grid-cols-4  gap-x-5 gap-y-8 pb-16">
+          {products?.map((p: Product) => {
+            return <ProductCard key={p.id} product={p} />;
+          })}
+          {mockProducts.map((p: Product) => {
+            return <ProductCard key={p.id} product={p} />;
+          })}
+        </div>
       </div>
+
       {/* page bg */}
       <Image
         src="/homepage-bg.png"

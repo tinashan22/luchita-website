@@ -41,7 +41,7 @@ export default function RootLayout({
         className={`${righteous.variable} ${roboto.variable} ${garamond.variable}`}
       >
         <MobileNav />
-        {children}
+        <div className="pt-14"> {children}</div>
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-import { firestore } from "./firebase";
+import { firebase } from "./firebase";
 import {
   getFirestore,
   collection,
@@ -11,7 +11,7 @@ import {
 import { COLLECTION_PRODUCTS } from "./firebase_constants";
 import { Product } from "@/interfaces";
 
-// const firestore = getFirestore(firebase);
+const firestore = getFirestore(firebase);
 
 export const getCollection = async <T,>(collectionName: string) => {
   let datas: any[] = [];

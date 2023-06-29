@@ -44,7 +44,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
       <Link href={`/product/${product.id}`}>
         <div className="flex-col ">
-          <div className="relative w-full h-56 md:h-[448px] ">
+          <div className="relative w-full h-56 md:h-96 ">
             <Image
               src="/product.png"
               alt="home page bg"
@@ -55,7 +55,9 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
           <div className="px-1 pt-3">
             <div className=" flex flex-row justify-between">
-              <p className="font-roboto font-medium text-xs">{product.name}</p>
+              <p className="font-roboto font-medium text-xs md:text-sm">
+                {product.name}
+              </p>
               <Image
                 src={preview}
                 alt="preview product icon"
