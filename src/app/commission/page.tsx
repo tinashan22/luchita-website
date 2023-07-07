@@ -6,8 +6,7 @@ import CommissionPage from "./commission";
 
 export default function Commission() {
   return (
-    <main className="flex min-h-screen  text-brandPurple">
-      <MobileNav />
+    <main className="flex min-h-screen h-full text-brandPurple bg-brandPink background-grid pb-32 selection:bg-brandLime ">
       <CommissionPage />
       <FloatingMenu />
     </main>

@@ -13,6 +13,10 @@ import ProductPhotoSlider from "./productPhotoContainer";
 import ProductInfoText from "./productInfoText";
 import LargeButton from "@/components/buttonLarge";
 import { ButtonType } from "@/constants";
+import { useRouter } from "next/navigation";
+import FloatingMenu from "@/components/floatingMenu";
+import { LargeProductImage } from "./photoContainers";
+import DesktopProductView from "./desktopProductView";
 
 export default function Page({
   params,
@@ -37,42 +41,35 @@ export default function Page({
       ],
     };
   }, []);
+
+  const router = useRouter();
   return (
-    <div className="min-h-screen pt-8 bg-brandCream text-brandPurple w-screen px-6">
-      <div className=" hidden md:block ">
-        <div className=" w-1/2 flex flex-col border ">
-          <div className="  image-container">
-            <Image
-              src="/product.png"
-              alt="home page bg"
-              sizes="(max-width: 1200px) 50vw, 50vw"
-              className="image"
-              fill={true}
-              draggable={false}
-            />
+    <div className="min-h-screen pt-8 bg-brandCream  selection:bg-brandPink text-brandPurple w-screen px-6">
+      {/* desktop product page */}
+      <DesktopProductView params={{ id: params.id }} />
+
+      <div className="hidden md:block ">
+        <div className=" w-1/2 flex flex-col  pb-32">
+          <div className="flex items-start font-garamond  text-md translate-y-[-20px]">
+            {" "}
+            <button
+              className="hover:opacity-100 opacity-60 "
+              onClick={() => router.back()}
+            >
+              {" "}
+              Shop all{" "}
+            </button>
+            <p className="opacity-60">/ Product Name</p>
           </div>
-          <div className="image-container">
-            <Image
-              src="/product.png"
-              alt="home page bg"
-              className="image"
-              fill={true}
-              draggable={false}
-            />
-          </div>
-          <div className="image-container">
-            <Image
-              src="/product.png"
-              alt="home page bg"
-              className="image"
-              fill={true}
-              draggable={false}
-            />{" "}
-          </div>
+
+          <LargeProductImage imageUrl="/product.png" />
+          <LargeProductImage imageUrl="/product.png" />
+          <LargeProductImage imageUrl="/product.png" />
+          <LargeProductImage imageUrl="/product.png" />
         </div>
-        <div className="fixed right-20 top-20 w-2/5 border">
+        <div className="fixed  right-6 lg:right-20 top-20 w-2/5">
           <ProductInfoText />
-          <div className="w-[280px] flex  flex-col border">
+          <div className=" w-full lg:w-[280px] flex flex-col">
             <LargeButton
               key="primary"
               type={ButtonType.LargePrimary}
@@ -91,9 +88,11 @@ export default function Page({
             />
           </div>
         </div>
+        <FloatingMenu />
       </div>
 
-      <div className="  md:hidden">
+      {/* mobile product page */}
+      <div className=" md:hidden">
         <Swiper
           ref={swiperRef}
           autoHeight={true}

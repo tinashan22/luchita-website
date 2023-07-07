@@ -42,7 +42,7 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
       </AnimatePresence>
 
-      <Link href={`/product/${product.id}`}>
+      <Link href={`/product/${product.id}`} scroll={false}>
         <div className="flex-col ">
           <div className="relative w-full h-56 md:h-96 ">
             <Image

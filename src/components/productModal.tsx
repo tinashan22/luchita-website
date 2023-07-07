@@ -59,7 +59,7 @@ export default function ProductModal({
     <Backdrop onClick={handleCloseModal}>
       <motion.div
         onClick={(e) => e.stopPropagation()}
-        className="m-auto "
+        className="m-auto"
         variants={animationVariants}
         initial="hidden"
         animate="visible"

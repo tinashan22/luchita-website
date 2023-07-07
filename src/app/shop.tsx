@@ -66,19 +66,19 @@ export default function ShopPage() {
       const products = data?.map((i: Product) => i);
       setProducts(products);
     });
-  });
+  }, []);
   return (
     // page container
-    <div className="relative w-full flex justify-center  pt-8 px-5 md:px-20 md:pt-28 ">
+    <div className="relative w-full flex justify-center  pt-8 px-5 md:px-20 md:pt-28 pb-32 ">
       <div className="max-w-[1352px] w-full  ">
         {" "}
-        <div className=" grid grid-cols-2 md:grid-cols-4  gap-x-5 gap-y-8 pb-16">
+        <div className=" grid grid-cols-2 md:grid-cols-4  gap-x-5 gap-y-8 ">
           {products?.map((p: Product) => {
             return <ProductCard key={p.id} product={p} />;
           })}
-          {mockProducts.map((p: Product) => {
+          {/* {mockProducts.map((p: Product) => {
             return <ProductCard key={p.id} product={p} />;
-          })}
+          })} */}
         </div>
       </div>
 

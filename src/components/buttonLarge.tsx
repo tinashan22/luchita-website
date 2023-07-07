@@ -60,14 +60,14 @@ export default function LargeButton({
         }
 
         
-            flex items-center justify-center rounded-[20px] border`}
+            flex items-center justify-center rounded-[20px] h-[48px] border`}
       >
         <p
           className={`
         
         ${type === ButtonType.LargePrimary && "text-brandLime"}
           ${type === ButtonType.LargeSecondary && "text-brandPurple"}
-        font-righteous text-brankPurple py-2`}
+        font-righteous text-brankPurple text-lg py-3 `}
         >
           {btnText}
         </p>

@@ -7,6 +7,9 @@ import {
   query,
   QueryConstraint,
   where,
+  getDoc,
+  doc,
+  DocumentReference,
 } from "firebase/firestore";
 import { COLLECTION_PRODUCTS } from "./firebase_constants";
 import { Product } from "@/interfaces";
@@ -20,7 +23,7 @@ export const getCollection = async <T,>(collectionName: string) => {
     const docs = await getDocs(
       query(
         collection(firestore, collectionName),
-        where("isDeleted", "!=", true),
+        // where("isDeleted", "!=", true),
         limit(15)
       )
     );
@@ -42,3 +45,16 @@ export const getCollection = async <T,>(collectionName: string) => {
 };
 
 export const getAllProducts = async () => getCollection(COLLECTION_PRODUCTS);
+
+export const getProduct = async (productId: string) => {
+  const docRef = doc(firestore, COLLECTION_PRODUCTS, productId);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    return docSnap.data();
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!", "getProduct");
+  }
+};
