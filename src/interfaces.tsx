@@ -3,7 +3,8 @@ export interface Product {
   name: string;
   price: number;
   type: string;
-  // description: string | undefined;
-  // displayOrder: number | undefined;
-  // isDeleted?: boolean | undefined;
+  primaryPhoto: string | undefined;
+  description: string | undefined;
+  displayOrder: number | undefined;
+  isDeleted?: boolean | undefined;
 }

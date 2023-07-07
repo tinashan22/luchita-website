@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import share from "../../../../public/share.svg";
 import Image from "next/image";
+import { Product } from "@/interfaces";
+import { ProductType } from "@/constants";
 
-export default function ProductInfoText() {
+export default function ProductInfoText({
+  product,
+}: {
+  product: Product | undefined;
+}) {
   const [copySuccess, setCopySuccess] = useState(false);
 
   async function copyToClip() {
@@ -15,10 +21,10 @@ export default function ProductInfoText() {
 
   return (
     <div className="flex flex-col pt-6 pb-12">
-      <h2 className="font-roboto font-medium text-2xl">Product Name</h2>
+      <h2 className="font-roboto font-medium text-2xl">{product?.name}</h2>
       <div className="flex flex-row justify-between">
         {" "}
-        <h4 className="font-garamond text-xl">$00</h4>
+        <h4 className="font-garamond text-xl">${product?.price}</h4>
         {!copySuccess ? (
           <div
             onClick={copyToClip}
@@ -41,13 +47,16 @@ export default function ProductInfoText() {
       </div>
       <p className="font-garamond text-lg pt-4">
         Noguchi&rsquo;s rose marble sculpture “The Void” was an early
-        inspiration for this recurring portal shape in our design.
+        inspiration for this recurring portal shape in our design.{" "}
+        {product?.description}
       </p>
-      <p className="font-garamond text-lg pt-4">
-        {" "}
-        All earrings sold in pairs. DM me @lucha.luchita to customize in a color
-        to your liking.{" "}
-      </p>
+      {product?.type == ProductType.Earrings && (
+        <p className="font-garamond text-lg pt-4">
+          {" "}
+          All earrings sold in pairs. DM me @lucha.luchita to customize in a
+          color to your liking.{" "}
+        </p>
+      )}
     </div>
   );
 }

@@ -4,25 +4,17 @@ import { useRouter } from "next/navigation";
 import LargeButton from "@/components/buttonLarge";
 import ProductInfoText from "./productInfoText";
 import FloatingMenu from "@/components/floatingMenu";
-import { ButtonType } from "@/constants";
+import { ButtonType, ProductType } from "@/constants";
 import { getProduct } from "@/firebase/firestore";
 import { useEffect, useState } from "react";
 
 export default function DesktopProductView({
-  params,
+  product,
 }: {
-  params: { id: string };
+  product: Product | undefined;
 }) {
   const router = useRouter();
 
-  const [product, setProduct] = useState<any>();
-
-  useEffect(() => {
-    getProduct(params.id).then((data: any) => {
-      const product = data;
-      setProduct(product);
-    });
-  }, []);
   return (
     <div className="hidden md:block ">
       <div className=" w-1/2 flex flex-col  pb-32">
@@ -44,7 +36,7 @@ export default function DesktopProductView({
         <LargeProductImage imageUrl="/product.png" />
       </div>
       <div className="fixed  right-6 lg:right-20 top-20 w-2/5">
-        <ProductInfoText />
+        <ProductInfoText product={product} />
         <div className=" w-full lg:w-[280px] flex flex-col">
           <LargeButton
             key="primary"
