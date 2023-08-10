@@ -67,7 +67,7 @@ export default function LargeButton({
         
         ${type === ButtonType.LargePrimary && "text-brandLime"}
           ${type === ButtonType.LargeSecondary && "text-brandPurple"}
-        font-righteous text-brankPurple text-lg py-3 `}
+        font-righteous text-lg py-3 `}
         >
           {btnText}
         </p>

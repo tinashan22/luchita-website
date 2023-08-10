@@ -9,7 +9,7 @@ import DesktopProductView from "./desktopProductView";
 import { getProduct } from "@/firebase/firestore";
 import MobileProductView from "./mobileProductView";
 
-export default function Page({
+export default function ProductLayout({
   params,
 }: {
   params: { id: string; product: Product };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import share from "../../../../public/share.svg";
+import share from "../../../../public/icons/share.svg";
 import Image from "next/image";
 import { Product } from "@/interfaces";
 import { ProductType } from "@/constants";

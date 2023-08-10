@@ -17,7 +17,7 @@ export default function Backdrop(props: PropsWithChildren<BackdropProps>) {
 
     <motion.div
       className="fixed top-0
-       left-0 w-full h-screen flex items-center justify-center  bg-slate-700 bg-opacity-50 bg-blur-sm z-10 "
+       left-0 w-full h-screen flex items-center justify-center  bg-slate-700 bg-opacity-50 bg-blur-sm z-20 "
       onClick={props.onClick}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

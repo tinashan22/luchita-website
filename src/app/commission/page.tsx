@@ -1,6 +1,3 @@
-import Image from "next/image";
-
-import MobileNav from "../../components/nav";
 import FloatingMenu from "../../components/floatingMenu";
 import CommissionPage from "./commission";
 
