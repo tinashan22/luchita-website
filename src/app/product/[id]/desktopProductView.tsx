@@ -29,11 +29,9 @@ export default function DesktopProductView({
           </button>
           <p className="opacity-60">/ {product?.name}</p>
         </div>
-
-        <LargeProductImage imageUrl="/product.png" />
-        <LargeProductImage imageUrl="/product.png" />
-        <LargeProductImage imageUrl="/product.png" />
-        <LargeProductImage imageUrl="/product.png" />
+        {product?.photoList.map((photoUrl, index) => {
+          return <LargeProductImage key={index} imageUrl={photoUrl} />;
+        })}
       </div>
       <div className="fixed  right-6 lg:right-20 top-20 w-2/5">
         <ProductInfoText product={product} />

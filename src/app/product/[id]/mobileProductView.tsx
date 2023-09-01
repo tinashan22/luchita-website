@@ -41,6 +41,7 @@ export default function MobileProductView({
         navigation={{
           enabled: true,
         }}
+        loop={true}
         freeMode={{ enabled: true, sticky: true }}
         pagination={{
           clickable: true,
@@ -49,39 +50,22 @@ export default function MobileProductView({
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
       >
-        <SwiperSlide>
-          <div className="h-[544px]">
-            <Image
-              src="/product.png"
-              alt="home page bg"
-              className=" object-cover  "
-              fill={true}
-              draggable={false}
-            />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className=" h-[544px]">
-            <Image
-              src="/product.png"
-              alt="home page bg"
-              className="object-cover "
-              fill={true}
-              draggable={false}
-            />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="">
-          <div className=" h-[544px]">
-            <Image
-              src="/product.png"
-              alt="home page bg"
-              className="object-cover "
-              fill={true}
-              draggable={false}
-            />
-          </div>
-        </SwiperSlide>
+        {product?.photoList.map((photoUrl, index) => {
+          return (
+            <SwiperSlide key={index}>
+              <div className="h-[544px]">
+                <Image
+                  key={index}
+                  src={photoUrl}
+                  alt="home page bg"
+                  className=" object-cover  "
+                  fill={true}
+                  draggable={false}
+                />
+              </div>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
       <ProductInfoText product={product} />
       <LargeButton

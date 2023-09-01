@@ -86,10 +86,10 @@ export default function ProductModal({
           </div>
           <div className="relative w-full h-[337px]">
             <Image
-              alt="product image"
               className="object-cover"
               fill={true}
-              src="/product.png"
+              src={`${product.primaryPhoto}`}
+              alt="product primary photo"
               placeholder="empty"
             />
           </div>

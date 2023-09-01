@@ -46,7 +46,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="flex-col ">
           <div className="relative w-full h-56 md:h-96 ">
             <Image
-              src="/product.png"
+              src={`${product.primaryPhoto}`}
               alt="home page bg"
               className="rounded-xl object-cover border border-brandPurple"
               fill={true}

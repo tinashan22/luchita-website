@@ -25,6 +25,7 @@ export default function ProductLayout({
         price: product.price,
         type: product.type ?? "earrings",
         primaryPhoto: product.primaryPhoto,
+        photoList: product.photoList,
         description: product.description,
         displayOrder: product.displayOrder,
         isDeleted: product.isDeleted,
