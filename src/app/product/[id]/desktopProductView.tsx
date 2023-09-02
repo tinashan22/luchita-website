@@ -36,7 +36,7 @@ export default function DesktopProductView({
       <div className="fixed  right-6 lg:right-20 top-20 w-2/5">
         <ProductInfoText product={product} />
         <div className=" w-full lg:w-[280px] flex flex-col">
-          <LargeButton
+          {/* <LargeButton
             key="primary"
             type={ButtonType.LargePrimary}
             btnText="Buy now"
@@ -44,12 +44,12 @@ export default function DesktopProductView({
               alert("go to checkout");
             }}
           />
-          <div className="h-[12px]"></div>
+          <div className="h-[12px]"></div> */}
 
           <LargeButton
             key="secondary"
             type={ButtonType.LargeSecondary}
-            btnText="Add to cart"
+            btnText="Join mailing list"
             handleClick={() => {}}
           />
         </div>

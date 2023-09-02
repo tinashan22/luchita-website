@@ -4,6 +4,8 @@ import "../../app/globals.css";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import ImageWithBorder from "./imageWithBorder";
+import CommissionPageGridRight from "./gridRight";
+import { CommissionPageGridLeft } from "./gridLeft";
 
 export default function CommissionPage() {
   return (
@@ -32,29 +34,24 @@ export default function CommissionPage() {
           of the pieces we’ve custom-made for clients over the past years.{" "}
         </p>
       </div>
-      <div className=" grid-cols-2 md:grid-cols-3 grid gap-x-5 gap-y-5  w-screen h-content px-4 md:px-20 py-8">
-        <ImageWithBorder imageUrl="/commission/holdMeUp/1.jpg" />
-        <ImageWithBorder imageUrl="/commission/holdMeUp/2.jpg" />
-        <ImageWithBorder imageUrl="/commission/holdMeUp/3.jpg" />
-        <div className="px-4 py-3 bg-brandLime rounded-lg md:hidden flex items-center">
-          {" "}
-          <p className="font-garamond text-md text-center ">
-            These earrings need an image description that will go here.
-          </p>
-        </div>
-      </div>
 
-      <div className="grid-cols-2 md:grid-cols-3  grid-flow-row-dense grid gap-x-5 gap-y-5   w-screen h-content  px-4 md:px-20 py-8">
-        <ImageWithBorder imageUrl="/commission/jellyfish/1.jpg" />
-        <ImageWithBorder imageUrl="/commission/jellyfish/2.jpg" />
-        <div className="px-4 py-3 bg-brandLime rounded-lg md:hidden flex items-center">
-          {" "}
-          <p className="font-garamond text-md text-center ">
-            This brooch also needs an image description that will go here.
-          </p>
-        </div>
-        <ImageWithBorder imageUrl="/commission/jellyfish/4.jpg" />
-      </div>
+      <CommissionPageGridRight
+        productName="holdMeUp"
+        description="A playful reference to pop culture, this representational design makes us smile with delight."
+      />
+
+      <CommissionPageGridLeft
+        productName="jellyfish"
+        description="Taking inspiration from luminescent deep sea creatures, this brooch brings the refreshing ocean breeze and summer vibes."
+      />
+      <CommissionPageGridRight
+        productName="corndog"
+        description="Nicknamed “corndog”, this earring is both playful and elegant, holding space on its own."
+      />
+      <CommissionPageGridLeft
+        productName="other"
+        description="Various personalized designs for spirits warm and cool."
+      />
     </div>
   );
 }

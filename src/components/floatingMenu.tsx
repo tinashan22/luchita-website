@@ -23,8 +23,8 @@ export default function FloatingMenu() {
         )}
 
         <div className="flex flex-row space-between">
-          <div className="w-[12px]"></div>
-          <InstagramButton />
+          {/* <div className="w-[12px]"></div>
+          <InstagramButton /> */}
           <div className="w-[12px]"></div>
           <InstagramButton />
         </div>

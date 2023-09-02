@@ -16,7 +16,7 @@ export default function ProductInfoText({
     setCopySuccess(true);
 
     useEffect;
-    setTimeout(() => setCopySuccess(false), 800);
+    setTimeout(() => setCopySuccess(false), 1800);
   }
 
   return (
@@ -39,8 +39,11 @@ export default function ProductInfoText({
           </div>
         ) : (
           <div>
-            <h4 className="font-garamond text-xl px-1 bg-brandPink">
-              product link copied
+            <h4
+              className="font-garamond text-xl px-1 
+            "
+            >
+              ☺ product link copied! ☺
             </h4>
           </div>
         )}
@@ -53,8 +56,15 @@ export default function ProductInfoText({
       {product?.type == ProductType.Earrings && (
         <p className="font-garamond text-lg pt-4">
           {" "}
-          All earrings sold in pairs. DM me @lucha.luchita to customize in a
-          color to your liking.{" "}
+          All earrings sold in pairs. DM{"  "}
+          <a
+            target="_blank"
+            className="font-medium hover:text-brandLime hover:bg-brandPurple underline md:no-underline"
+            href={"https://www.instagram.com/lucha.luchita/"}
+          >
+            @lucha.luchita
+          </a>{" "}
+          to customize in a color to your liking.{" "}
         </p>
       )}
     </div>

@@ -85,10 +85,10 @@ body {
   background-size: 24px 24px;
   background-image: linear-gradient(
       to right,
-      rgba(55, 31, 59, 0.1) 1px,
+      rgba(55, 31, 59, 0.08) 1px,
       transparent 1px
     ),
-    linear-gradient(to bottom, rgba(55, 31, 59, 0.1) 1px, transparent 1px);
+    linear-gradient(to bottom, rgba(55, 31, 59, 0.08) 1px, transparent 1px);
 }
 
 .image-container {

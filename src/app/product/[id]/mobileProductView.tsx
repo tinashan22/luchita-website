@@ -68,7 +68,7 @@ export default function MobileProductView({
         })}
       </Swiper>
       <ProductInfoText product={product} />
-      <LargeButton
+      {/* <LargeButton
         key="primary"
         type={ButtonType.LargePrimary}
         btnText="Buy now"
@@ -76,12 +76,12 @@ export default function MobileProductView({
           alert("go to checkout");
         }}
       />
-      <div className="h-[12px]"></div>
+      <div className="h-[12px]"></div> */}
 
       <LargeButton
         key="secondary"
         type={ButtonType.LargeSecondary}
-        btnText="Add to cart"
+        btnText="☞ Join mailing list "
         handleClick={() => {}}
       />
       <div className="h-[54px]"></div>

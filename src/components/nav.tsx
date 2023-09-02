@@ -108,7 +108,16 @@ export default function MobileNav() {
                 Lucha Luchita
               </p>
             </Link>
-            {isUserLoggedIn ? (
+            <Link href="/account">
+              <div>
+                <Image
+                  className="h-[24px]"
+                  src={userIcon}
+                  alt="icon for user account page"
+                />
+              </div>
+            </Link>
+            {/* {isUserLoggedIn ? (
               <div>
                 <Image
                   className="h-[24px]"
@@ -120,7 +129,7 @@ export default function MobileNav() {
               <Link href="/account">
                 <SmallButton btnText="log in" />
               </Link>
-            )}
+            )} */}
           </motion.div>
         )}
       </div>

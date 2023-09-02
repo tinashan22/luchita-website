@@ -1,4 +1,4 @@
-import { firebase } from "./firebase";
+import { auth, firebase } from "./firebase";
 import {
   getFirestore,
   collection,
@@ -10,8 +10,10 @@ import {
   getDoc,
   doc,
   DocumentReference,
+  Timestamp,
+  setDoc,
 } from "firebase/firestore";
-import { COLLECTION_PRODUCTS } from "./firebase_constants";
+import { COLLECTION_PRODUCTS, COLLECTION_USERS } from "./firebase_constants";
 import { Product } from "@/interfaces";
 
 const firestore = getFirestore(firebase);
@@ -57,4 +59,17 @@ export const getProduct = async (productId: string) => {
     // docSnap.data() will be undefined in this case
     console.log("No such document!", "getProduct");
   }
+};
+
+export const createUserRecord = async (
+  userId: string,
+  email: string,
+  displayName: string
+) => {
+  await setDoc(doc(firestore, COLLECTION_USERS, userId), {
+    email: email,
+    createdAt: Timestamp.now(),
+    displayName: displayName,
+    userId: userId,
+  });
 };
