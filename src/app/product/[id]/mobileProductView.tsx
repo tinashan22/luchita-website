@@ -9,6 +9,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ProductInfoText from "./productInfoText";
 import LargeButton from "@/components/buttonLarge";
 import { ButtonType } from "@/constants";
+import { useRouter } from "next/navigation";
+import ProductBreadcrumb from "./breadcrumb";
 
 export default function MobileProductView({
   product,
@@ -16,6 +18,7 @@ export default function MobileProductView({
   product: Product | undefined;
 }) {
   const swiperRef = useRef(null);
+  const router = useRouter();
   // useEffect(() => {
   //   const swiperContainer = swiperRef.current;
   //   const params = {

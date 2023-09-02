@@ -7,6 +7,7 @@ import FloatingMenu from "@/components/floatingMenu";
 import { ButtonType, ProductType } from "@/constants";
 import { getProduct } from "@/firebase/firestore";
 import { useEffect, useState } from "react";
+import ProductBreadcrumb from "./breadcrumb";
 
 export default function DesktopProductView({
   product,
@@ -18,17 +19,6 @@ export default function DesktopProductView({
   return (
     <div className="hidden md:block ">
       <div className=" w-1/2 flex flex-col  pb-32">
-        <div className="flex items-start font-garamond  text-md translate-y-[-20px]">
-          {" "}
-          <button
-            className="hover:opacity-100 opacity-60 "
-            onClick={() => router.back()}
-          >
-            {" "}
-            Shop all{" "}
-          </button>
-          <p className="opacity-60">/ {product?.name}</p>
-        </div>
         {product?.photoList.map((photoUrl, index) => {
           return <LargeProductImage key={index} imageUrl={photoUrl} />;
         })}
@@ -36,6 +26,7 @@ export default function DesktopProductView({
       <div className="fixed  right-6 lg:right-20 top-20 w-2/5">
         <ProductInfoText product={product} />
         <div className=" w-full lg:w-[280px] flex flex-col">
+          {/* Buy now button disabled */}
           {/* <LargeButton
             key="primary"
             type={ButtonType.LargePrimary}
@@ -49,7 +40,7 @@ export default function DesktopProductView({
           <LargeButton
             key="secondary"
             type={ButtonType.LargeSecondary}
-            btnText="Join mailing list"
+            btnText="☞ Join mailing list"
             handleClick={() => {}}
           />
         </div>

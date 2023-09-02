@@ -1,4 +1,4 @@
-import AccountPage from "./account";
+import AccountPage from "./createAccount";
 
 export default function AccountLayout() {
   return (

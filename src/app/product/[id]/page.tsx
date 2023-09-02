@@ -8,6 +8,7 @@ import { Product } from "@/interfaces";
 import DesktopProductView from "./desktopProductView";
 import { getProduct } from "@/firebase/firestore";
 import MobileProductView from "./mobileProductView";
+import ProductBreadcrumb from "./breadcrumb";
 
 export default function ProductLayout({
   params,
@@ -36,7 +37,8 @@ export default function ProductLayout({
   }, []);
 
   return (
-    <div className="min-h-screen pt-8 bg-brandCream  selection:bg-brandPink text-brandPurple w-screen px-6">
+    <div className="min-h-screen pt-4 md:pt-8 bg-brandCream  selection:bg-brandPink text-brandPurple w-screen px-6">
+      <ProductBreadcrumb product={product} />
       {/* desktop product page */}
       <DesktopProductView product={product} />
       {/* mobile product page */}
