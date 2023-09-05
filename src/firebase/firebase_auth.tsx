@@ -44,18 +44,24 @@ export const createNewUser = async (
 
 export const signIn = async (email: string, password: string) => {
   //   if (!email || !password) return false;
+
+  let loginMsg: string = "";
   await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-
       // ... set auth context?
-      return user;
+
+      loginMsg = "success";
     })
     .catch((error) => {
-      const errorCode = error.code;
+      const errorCode = error.code as string;
       const errorMessage = error.message;
+      console.error(errorCode);
+      loginMsg = errorCode;
     });
+
+  return loginMsg;
 };
 
 export const userStateListener = (callback: NextOrObserver<User>) => {

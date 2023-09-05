@@ -29,7 +29,7 @@ export default function ProductCard({ product }: { product: Product }) {
         mode="wait"
         // Fires when all exiting nodes have completed animating out
         onExitComplete={() => {
-          framerLogger("product modal");
+          framerLogger("product modal close");
         }}
       >
         {modalShow && (
@@ -42,12 +42,12 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
       </AnimatePresence>
 
-      <Link href={`/product/${product.id}`} scroll={false}>
+      <Link href={`/product/${product.id}`}>
         <div className="flex-col ">
           <div className="relative w-full h-56 md:h-96 ">
             <Image
               src={`${product.primaryPhoto}`}
-              alt="home page bg"
+              alt="product primary photo"
               className="rounded-xl object-cover border border-brandPurple"
               fill={true}
               draggable={false}

@@ -12,8 +12,13 @@ import {
   DocumentReference,
   Timestamp,
   setDoc,
+  addDoc,
 } from "firebase/firestore";
-import { COLLECTION_PRODUCTS, COLLECTION_USERS } from "./firebase_constants";
+import {
+  COLLECTION_EMAIL_SUBSCRIBERS,
+  COLLECTION_PRODUCTS,
+  COLLECTION_USERS,
+} from "./firebase_constants";
 import { Product } from "@/interfaces";
 
 const firestore = getFirestore(firebase);
@@ -72,4 +77,20 @@ export const createUserRecord = async (
     displayName: displayName,
     userId: userId,
   });
+};
+
+export const createEmailSubscriber = async (
+  displayName: string,
+  email: string
+) => {
+  const docRef = await addDoc(
+    collection(firestore, COLLECTION_EMAIL_SUBSCRIBERS),
+    {
+      email: email,
+      createdAt: Timestamp.now(),
+      displayName: displayName,
+    }
+  );
+  console.log(docRef.id);
+  return docRef.id;
 };

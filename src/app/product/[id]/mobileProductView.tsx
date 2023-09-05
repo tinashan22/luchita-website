@@ -2,7 +2,7 @@
 
 import { Product } from "@/interfaces";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { FreeMode, Navigation, Pagination } from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +11,9 @@ import LargeButton from "@/components/buttonLarge";
 import { ButtonType } from "@/constants";
 import { useRouter } from "next/navigation";
 import ProductBreadcrumb from "./breadcrumb";
+import { AnimatePresence, motion } from "framer-motion";
+import EmailSignUpModal from "@/components/emailSignUpModal";
+import { framerLogger } from "@/stateLogger";
 
 export default function MobileProductView({
   product,
@@ -19,6 +22,14 @@ export default function MobileProductView({
 }) {
   const swiperRef = useRef(null);
   const router = useRouter();
+  const [modalShow, setModalShow] = useState(false);
+
+  function handleClickJoinMail(
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) {
+    e.preventDefault();
+    setModalShow(true);
+  }
   // useEffect(() => {
   //   const swiperContainer = swiperRef.current;
   //   const params = {
@@ -36,7 +47,28 @@ export default function MobileProductView({
   //   };
   // }, []);
   return (
-    <div className=" md:hidden">
+    <motion.div className=" md:hidden">
+      <AnimatePresence
+        // Disable any initial animations on children that
+        // are present when the component is first rendered
+        initial={false}
+        // Only render one component at a time.
+        // The exiting component will finish its exit
+        // animation before entering component is rendered
+        mode="wait"
+        // Fires when all exiting nodes have completed animating out
+        onExitComplete={() => {
+          framerLogger("product modal close");
+        }}
+      >
+        {modalShow && (
+          <EmailSignUpModal
+            handleCloseModal={() => {
+              setModalShow(false);
+            }}
+          />
+        )}
+      </AnimatePresence>
       <Swiper
         ref={swiperRef}
         autoHeight={true}
@@ -85,9 +117,11 @@ export default function MobileProductView({
         key="secondary"
         type={ButtonType.LargeSecondary}
         btnText="☞ Join mailing list "
-        handleClick={() => {}}
+        handleClick={(e) => {
+          handleClickJoinMail(e);
+        }}
       />
       <div className="h-[54px]"></div>
-    </div>
+    </motion.div>
   );
 }

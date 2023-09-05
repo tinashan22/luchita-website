@@ -18,28 +18,53 @@ export default function LoginPage({
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const [signInMsg, setSignInMsg] = useState("");
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
-    console.log(formFields);
   };
 
   //rewrite
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      resetFormFields();
       // Send the email and password to firebase
-      const userCredential = await signIn(email, password);
+      const userCredentialMsg = await signIn(email, password);
 
-      if (userCredential != null) {
+      if (userCredentialMsg === "success") {
         resetFormFields();
         router.push("/profile");
         //go to log in page with email account
       } else {
-        alert("No account found with this email. Did you forget to sign up?");
-        // createNewUser(username, email, password);
-        // resetFormFields();
+        switch (userCredentialMsg) {
+          case "auth/wrong-password":
+            console.log("wrong password", userCredentialMsg);
+            // alert("Wrong password. Please try again");
+            setSignInMsg("Wrong password. Please try again");
+
+            break;
+
+          case "auth/user-not-found":
+            console.log("no email", userCredentialMsg);
+            setSignInMsg(
+              "No account found with this email. Did you forget to sign up?"
+            );
+
+            break;
+
+          case "auth/too-many-request":
+            console.log("too many request", userCredentialMsg);
+            setSignInMsg("Too many attempts. Please try again later.");
+
+            break;
+
+          default:
+            console.log("default", userCredentialMsg);
+            setSignInMsg("There was an error. Please try again.");
+
+            break;
+        }
       }
     } catch (error: any) {
       console.log("User Sign In Failed", error.message);
@@ -61,37 +86,46 @@ export default function LoginPage({
       </h1>
 
       <form action="Log in with email and password" onSubmit={handleSubmit}>
-        <label className="text-xs" title="email">
-          {" "}
-          Email{" "}
-        </label>
-        <input
-          className="font-garamond p-2 mb-4 w-full"
-          onChange={handleChange}
-          value={formFields.email}
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          required={true}
-        />
-        <label className="text-xs" title="password">
-          {" "}
-          Password
-        </label>
-        <input
-          className="font-garamond p-2 mb-4 w-full "
-          onChange={handleChange}
-          value={formFields.password}
-          type="password"
-          name="password"
-          placeholder="Enter your password"
-          required={true}
-        />
-
+        <div className="flex flex-col justify-start">
+          <label className="text-xs font-roboto opacity-80" title="email">
+            {" "}
+            Email{" "}
+          </label>
+          <input
+            className="font-garamond p-2 mt-1 mb-4 w-full md:w-1/3 lg:w-1/3"
+            onChange={handleChange}
+            value={formFields.email}
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required={true}
+          />
+        </div>
+        <div className="flex flex-col justify-start">
+          <label className="text-xs font-roboto opacity-80" title="password">
+            {" "}
+            Password
+          </label>
+          <input
+            className="font-garamond p-2 mt-1 mb-2 w-full md:w-1/3 lg:w-1/3"
+            onChange={handleChange}
+            value={formFields.password}
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required={true}
+          />
+        </div>
+        {signInMsg.length > 1 && (
+          <p className="mt-0 font-roboto text-xs  text-red-500 uppercase">
+            {" "}
+            {signInMsg}
+          </p>
+        )}
         <input
           value="Log in"
-          className=" w-full bg-brandPurple border-brandLime
-        flex items-center justify-center rounded-[20px] h-[48px] border  text-brandLime font-righteous text-lg py-3 mt-4"
+          className=" w-full md:w-1/3 lg:w-1/3 bg-brandPurple border-brandLime
+        flex items-center justify-center rounded-[20px] h-[48px] border  text-brandLime font-righteous text-lg py-3 mt-10"
           type="submit"
         />
       </form>
