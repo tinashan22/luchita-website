@@ -2,7 +2,7 @@
 import Image from "next/image";
 import "../../app/globals.css";
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import ImageWithBorder from "./imageWithBorder";
 import CommissionPageGridRight from "./gridRight";
 import { CommissionPageGridLeft } from "./gridLeft";

@@ -91,6 +91,5 @@ export const createEmailSubscriber = async (
       displayName: displayName,
     }
   );
-  console.log(docRef.id);
   return docRef.id;
 };

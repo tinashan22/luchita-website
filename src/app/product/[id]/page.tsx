@@ -32,8 +32,11 @@ export default function ProductLayout({
         isDeleted: product.isDeleted,
       };
       setProduct(currentProduct);
-      console.log(product);
     });
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   return (

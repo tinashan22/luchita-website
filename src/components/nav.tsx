@@ -70,7 +70,6 @@ export default function MobileNav() {
   const [isTopOfPage, setTopOfPage] = useState(true);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    console.log("Page scroll: ", latest, window.innerHeight / 20);
     if (latest > 20) {
       setTopOfPage(false);
     } else {
@@ -80,7 +79,7 @@ export default function MobileNav() {
   return (
     <motion.div>
       <div className="bg-brandLime h-14 min-w-full top-0 fixed flex items-center justify-center border-b border-brandPurple z-10 selection:bg-brandCream">
-        {isTopOfPage && (
+        {true && (
           <motion.div
             variants={logoNavAnimationVariants}
             initial="hidden"
@@ -94,8 +93,8 @@ export default function MobileNav() {
             </Link>
           </motion.div>
         )}
-
-        {!isTopOfPage && (
+        {/* beginning of login button */}
+        {/* {!isTopOfPage && (
           <motion.div
             variants={navAnimationVariants}
             initial="hidden"
@@ -109,7 +108,7 @@ export default function MobileNav() {
               </p>
             </Link>
             <Link href="/account">
-              <div>
+            <div>
                 <Image
                   className="h-[24px]"
                   src={userIcon}
@@ -117,7 +116,7 @@ export default function MobileNav() {
                 />
               </div>
             </Link>
-            {/* {isUserLoggedIn ? (
+            {isUserLoggedIn ? (
               <div>
                 <Image
                   className="h-[24px]"
@@ -129,9 +128,11 @@ export default function MobileNav() {
               <Link href="/account">
                 <SmallButton btnText="log in" />
               </Link>
-            )} */}
+            )}
           </motion.div>
-        )}
+        )} */}
+
+        {/* end of login */}
       </div>
     </motion.div>
   );

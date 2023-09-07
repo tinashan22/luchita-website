@@ -23,9 +23,11 @@ export default function ImageWithBorder({
           sizes="100%"
           src={imageUrl}
           alt="product photo "
-          priority={true}
+          priority={false}
           fill={true}
           draggable={true}
+          placeholder={"blur"}
+          blurDataURL="/placeholder.png"
         />
       </div>
       {showLabel && (

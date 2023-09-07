@@ -51,6 +51,8 @@ export default function ProductCard({ product }: { product: Product }) {
               className="rounded-xl object-cover border border-brandPurple"
               fill={true}
               draggable={false}
+              placeholder={"blur"}
+              blurDataURL="/placeholder.png"
             />
           </div>
           <div className="px-1 pt-3">

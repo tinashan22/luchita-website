@@ -4,8 +4,8 @@ import LargeButton from "@/components/buttonLarge";
 import { ButtonType } from "@/constants";
 import { createNewUser, signIn } from "@/firebase/firebase_auth";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 export default function AccountPage() {
   const router = useRouter();
@@ -31,14 +31,15 @@ export default function AccountPage() {
       // Send the email and password to firebase
       const userCredential = await signIn(email, password);
 
-      if (userCredential != null) {
+      // if (userCredential != null) {
+      if (userCredential == "success") {
         resetFormFields();
-        alert("This email has already been used with an account");
+        // alert("This email has already been used with an account");
+        router.push("/login", { email: email });
         //go to log in page with email account
       } else {
         createNewUser(username, email, password);
         resetFormFields();
-
         router.push("/profile");
       }
     } catch (error: any) {
