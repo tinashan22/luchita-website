@@ -58,8 +58,8 @@ export default function ProductInfoText({
       </div>
 
       <div className="flex flex-col gap-4 font-garamond text-lg">
-        {splitDesc(product?.description).map((str) => {
-          return <p>{str}</p>;
+        {splitDesc(product?.description).map((str, index) => {
+          return <p key={index}>{str}</p>;
         })}
       </div>
 
