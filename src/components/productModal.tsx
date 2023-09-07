@@ -93,8 +93,9 @@ export default function ProductModal({
               placeholder="empty"
             />
           </div>
-          <div className="border mx-4 my-8 border-brandPurple rounded-[20px] overflow-y-scroll h-[270px]">
-            <div className="flex-col items-center px-4 pt-4 pb-10 text-brandPurple">
+          <div className="border mx-4 my-8 border-brandPurple rounded-[20px] overflow-y-scroll h-[224px]  ">
+            {/* h-272px */}
+            <div className="flex-col items-center px-4 pt-8 pb-10 text-brandPurple">
               <h2 className="font-roboto font-medium text-2xl">
                 {product.name}
               </h2>
@@ -109,7 +110,7 @@ export default function ProductModal({
               )} */}
             </div>
             <div className="pb-10 px-4">
-              <LargeButton
+              {/* <LargeButton
                 key="primary"
                 type={ButtonType.LargePrimary}
                 btnText="Buy now"
@@ -118,11 +119,12 @@ export default function ProductModal({
                   alert("go to checkout");
                 }}
               />
-              <div className="h-[12px]"></div>
+              <div className="h-[12px]"></div> */}
               <Link href={`/product/${product.id}`}>
                 <LargeButton
                   key="secondary"
-                  type={ButtonType.LargeSecondary}
+                  type={ButtonType.LargePrimary}
+                  // type={ButtonType.LargeSecondary}
                   btnText="See more"
                   handleClick={() => {}}
                 />

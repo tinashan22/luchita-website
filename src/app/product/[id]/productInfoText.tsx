@@ -19,6 +19,14 @@ export default function ProductInfoText({
     setTimeout(() => setCopySuccess(false), 1800);
   }
 
+  const splitDesc = (str?: string) => {
+    if (str?.includes(`<br/>`)) {
+      return str.split(`<br/>`);
+    } else {
+      return [str];
+    }
+  };
+
   return (
     <div className="flex flex-col pt-6 pb-12">
       <h2 className="font-roboto font-medium text-2xl">{product?.name}</h2>
@@ -48,11 +56,13 @@ export default function ProductInfoText({
           </div>
         )}
       </div>
-      <p className="font-garamond text-lg pt-4">
-        Noguchi&rsquo;s rose marble sculpture “The Void” was an early
-        inspiration for this recurring portal shape in our design.{" "}
-        {product?.description}
-      </p>
+
+      <div className="flex flex-col gap-4 font-garamond text-lg">
+        {splitDesc(product?.description).map((str) => {
+          return <p>{str}</p>;
+        })}
+      </div>
+
       {product?.type == ProductType.Earrings && (
         <p className="font-garamond text-lg pt-4">
           {" "}
