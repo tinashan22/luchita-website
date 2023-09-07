@@ -95,11 +95,14 @@ export default function ProductModal({
           </div>
           <div className="border mx-4 my-8 border-brandPurple rounded-[20px] overflow-y-scroll h-[224px]  ">
             {/* h-272px */}
-            <div className="flex-col items-center px-4 pt-8 pb-10 text-brandPurple">
-              <h2 className="font-roboto font-medium text-2xl">
+            <div className="flex-col items-center justify-center px-4 pt-8 pb-10 text-brandPurple">
+              <h2 className="font-roboto font-medium text-2xl text-center ">
                 {product.name}
               </h2>
-              <h4 className="font-garamond text-xl">${product.price}</h4>
+              <h4 className="font-garamond text-xl text-center">
+                ${product.price}
+              </h4>
+              <div className="border-[0.75px] border-brandPurple mt-4"></div>
               {/* <p className="font-garamond text-sm">{product.description}</p> */}
               {/* {product.type === ProductType.Earrings && (
                 <p className="font-garamond text-sm">
