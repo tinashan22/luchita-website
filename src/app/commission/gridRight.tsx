@@ -14,6 +14,7 @@ export default function CommissionPageGridRight({
           <ImageWithBorder
             key={imageNum}
             imageUrl={`/commission/${productName}/${imageNum}.jpg`}
+            blurImageUrl={`/commission-blur/${productName}/${imageNum}.jpg`}
             description={description}
           />
         );

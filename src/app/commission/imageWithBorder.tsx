@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 
 export default function ImageWithBorder({
   imageUrl,
+  blurImageUrl,
   description,
 }: {
   imageUrl: string;
+  blurImageUrl: string;
   description: string;
 }) {
   const [showLabel, setLabelShow] = useState(false);
@@ -17,17 +19,16 @@ export default function ImageWithBorder({
       onMouseLeave={() => setLabelShow(false)}
       className="relative"
     >
-      <div className="image-container relative m-h-[180px]">
+      <div className="image-container relative">
         <Image
-          className="absolute top-0 left-0 image rounded-lg border border-brandLime "
+          className="absolute top-0 left-0 image rounded-lg border border-brandLime min-h-[200px]  sm:min-h-[400px]  md:min-h-[280px] lg:min-h-[408px] xl:min-h-[538px]"
           sizes="100%"
           src={imageUrl}
           alt="product photo "
           priority={false}
           fill={true}
-          draggable={true}
           placeholder={"blur"}
-          blurDataURL="/placeholder.png"
+          blurDataURL={blurImageUrl}
         />
       </div>
       {showLabel && (

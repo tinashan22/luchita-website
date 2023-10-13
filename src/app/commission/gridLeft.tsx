@@ -14,6 +14,7 @@ export function CommissionPageGridLeft({
           <ImageWithBorder
             key={imageNum}
             imageUrl={`/commission/${productName}/${imageNum}.jpg`}
+            blurImageUrl={`/commission-blur/${productName}/${imageNum}.jpg`}
             description={description}
           />
         );
@@ -24,6 +25,7 @@ export function CommissionPageGridLeft({
       </div>
       <ImageWithBorder
         imageUrl={`/commission/${productName}/3.jpg`}
+        blurImageUrl={`/commission-blur/${productName}/3.jpg`}
         description={description}
       />
     </div>

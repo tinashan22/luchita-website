@@ -48,7 +48,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <Image
               src={`${product.primaryPhoto}`}
               alt="product primary photo"
-              className="rounded-xl object-cover border border-brandPurple"
+              className="rounded-xl object-cover border border-brandPurple   transition-opacity delay-150 ease-in duration-1000"
               fill={true}
               draggable={false}
               placeholder={"blur"}
