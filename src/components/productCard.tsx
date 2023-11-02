@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Product } from "@/interfaces";
+import { ProductRecord } from "@/interfaces";
 import { useState, MouseEvent } from "react";
 import ProductModal from "./productModal";
 import { AnimatePresence, motion } from "framer-motion";
@@ -9,7 +9,7 @@ import { framerLogger } from "@/stateLogger";
 import preview from "../../public/preview.svg";
 import Link from "next/link";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product }: { product: ProductRecord }) {
   const [modalShow, setModalShow] = useState(false);
 
   function handleClickPreviewIcon(e: MouseEvent) {
@@ -50,6 +50,7 @@ export default function ProductCard({ product }: { product: Product }) {
               alt="product primary photo"
               className="rounded-xl object-cover border border-brandPurple   transition-opacity delay-150 ease-in duration-1000"
               fill={true}
+              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
               draggable={false}
               placeholder={"blur"}
               blurDataURL="/placeholder.png"

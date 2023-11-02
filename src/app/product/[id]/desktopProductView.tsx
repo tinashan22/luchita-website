@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@/interfaces";
+import { ProductRecord } from "@/interfaces";
 import { LargeProductImage } from "./photoContainers";
 import { useRouter } from "next/navigation";
 import LargeButton from "@/components/buttonLarge";
@@ -15,7 +15,7 @@ import EmailSignUpModal from "@/components/emailSignUpModal";
 export default function DesktopProductView({
   product,
 }: {
-  product: Product | undefined;
+  product: ProductRecord | undefined;
 }) {
   const router = useRouter();
 

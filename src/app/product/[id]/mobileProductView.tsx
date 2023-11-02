@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@/interfaces";
+import { ProductRecord } from "@/interfaces";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { FreeMode, Navigation, Pagination } from "swiper";
@@ -18,7 +18,7 @@ import { framerLogger } from "@/stateLogger";
 export default function MobileProductView({
   product,
 }: {
-  product: Product | undefined;
+  product: ProductRecord | undefined;
 }) {
   const swiperRef = useRef(null);
   const router = useRouter();
