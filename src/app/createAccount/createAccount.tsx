@@ -1,11 +1,9 @@
 "use client";
 
-import LargeButton from "@/components/buttonLarge";
-import { ButtonType } from "@/constants";
-import { createNewUser, signIn } from "@/firebase/firebase_auth";
+import { createNewUser } from "@/firebase/firebase_auth";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 export default function AccountPage() {
   const router = useRouter();

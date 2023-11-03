@@ -14,19 +14,6 @@ export default function ProfilePage() {
   const [hasAuthError, setAuthError] = useState<boolean>(false);
   const [userRecord, setUserRecord] = useState<UserRecord>();
 
-  //runs once when component mounts
-  useEffect(() => {
-    //scroll to top
-    window.scrollTo(0, 0);
-  }, []);
-
-  //runs everytime currentUser changes, may not need with context
-  //   useEffect(() => {
-  //     if (currentUserRecord) {
-  //       console.log(currentUserRecord);
-  //     }
-  //   }, []);
-
   const date: Date = new Date(currentUserRecord?.createdAt ?? "");
 
   return (

@@ -43,7 +43,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           <MobileNav />
-          <div className="pt-14"> {children}</div>
+          <div className="mt-14"> {children}</div>
         </AuthProvider>
       </body>
     </html>
