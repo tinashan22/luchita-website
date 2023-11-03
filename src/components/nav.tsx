@@ -12,6 +12,7 @@ import SmallButton from "./buttonSmall";
 import userIcon from "../../public/icons/user.svg";
 import Image from "next/image";
 import { AuthContext, AuthProvider } from "@/context/authContext";
+import { auth } from "@/firebase/firebase";
 
 const navAnimationVariants = {
   hidden: {
@@ -92,9 +93,12 @@ export default function MobileNav() {
   //log in status
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const { authUser, currentUserRecord } = useContext(AuthContext);
+
   useEffect(() => {
     setUserLoggedIn(authUser != null);
-  });
+    console.log("nav use effect update", authUser);
+    return setUserLoggedIn(authUser != null);
+  }, [authUser]);
 
   //nav animation
   const { scrollY } = useScroll();
@@ -138,28 +142,32 @@ export default function MobileNav() {
                 Lucha Luchita
               </p>
             </Link>
-            <Link href={isUserLoggedIn ? "/profile" : "/account"}>
+
+            {/* <Link href={authUser != null ? "/profile" : "/createAccount"}>
               <div>
                 <Image
                   className="h-[24px]"
                   src={userIcon}
                   alt="icon for user account page"
                 />
+                {authUser?.toString() || "IS NULL"}
               </div>
-            </Link>
-            {/* {isUserLoggedIn ? (
+            </Link> */}
+            {authUser != null ? (
               <div>
-                <Image
-                  className="h-[24px]"
-                  src={userIcon}
-                  alt="icon for user account page"
-                />
+                <Link href="/profile">
+                  <Image
+                    className="h-[24px]"
+                    src={userIcon}
+                    alt="icon for user account page"
+                  />
+                </Link>
               </div>
             ) : (
-              <Link href="/account">
+              <Link href="/login">
                 <SmallButton btnText="log in" />
               </Link>
-            )} */}
+            )}
           </motion.div>
         )}
 

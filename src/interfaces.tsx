@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface ProductRecord {
   id: number;
   name: string;
@@ -11,8 +13,9 @@ export interface ProductRecord {
 }
 
 export interface UserRecord {
-  id: number;
+  userId: string;
   name: string;
-  email: number;
+  email: string;
+  createdAt: Date;
   isDeleted?: boolean | undefined;
 }

@@ -90,10 +90,7 @@ export const getUserRecordById = async (userId: string) => {
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!", "getUserRecord");
-    return {
-      success: false,
-      message: "No user record found.",
-    };
+    return null;
   }
 };
 

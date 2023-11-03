@@ -38,23 +38,31 @@ export const AuthProvider = ({ children }: Props) => {
     const unsubscribe = userStateListener((auth) => {
       console.log("listening");
       if (auth) {
-        console.log("has user", auth);
         setAuthUser(auth);
-        if (!currentUserRecord) {
-          //get user record from firestore
-          getUserRecordById(`${auth?.uid}+123`)
+        if (
+          !currentUserRecord ||
+          currentUserRecord.email === undefined ||
+          currentUserRecord.createdAt === undefined ||
+          currentUserRecord.userId != auth.uid
+        ) {
+          //get user record from firestore, write into session storage, and set currentUserRecord context
+          getUserRecordById(`${auth?.uid}`)
             .then((data: any) => {
+              console.log("data", data);
               const userRecord: UserRecord = {
-                id: data.id,
+                userId: data.userId,
                 name: data.name,
                 email: data.email,
+                createdAt: data.createdAt.toDate(),
                 isDeleted: data.isDeleted,
               };
+              console.log("session storage", userRecord);
               //write into session storage
               sessionStorage.setItem(
                 SessionStorageKey.UserRecord,
                 JSON.stringify(userRecord)
               );
+
               //set currentUserRecord
               setCurrentUserRecord(userRecord);
             })
@@ -70,11 +78,16 @@ export const AuthProvider = ({ children }: Props) => {
   // As soon as setting the current user to null,
   // the user will be redirected to the home page.
   const signOut = () => {
-    SignOutUser();
-    setAuthUser(null);
-    sessionStorage.removeItem(SessionStorageKey.UserRecord);
-    setCurrentUserRecord(null);
-    router.push("/");
+    SignOutUser()
+      .then(() => {
+        router.push("/");
+        setAuthUser(null);
+        sessionStorage.removeItem(SessionStorageKey.UserRecord);
+        setCurrentUserRecord(null);
+      })
+      .catch((e) => {
+        console.error("Error signing out: ", e);
+      });
   };
 
   const value = {
