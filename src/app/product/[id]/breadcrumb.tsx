@@ -1,10 +1,10 @@
-import { Product } from "@/interfaces";
+import { ProductRecord } from "@/interfaces";
 import { useRouter } from "next/navigation";
 
 export default function ProductBreadcrumb({
   product,
 }: {
-  product: Product | undefined;
+  product: ProductRecord | undefined;
 }) {
   const router = useRouter();
 

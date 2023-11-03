@@ -1,4 +1,4 @@
-import { Product } from "@/interfaces";
+import { ProductRecord } from "@/interfaces";
 import LargeButton from "./buttonLarge";
 import { ButtonType, ProductType } from "@/constants";
 import Image from "next/image";
@@ -13,7 +13,7 @@ type ProductModalProps = {
   handleCloseModal: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
-  product: Product;
+  product: ProductRecord;
 };
 
 const animationVariants = {
