@@ -22,9 +22,7 @@ export default function DesktopProductView({
 
   const [modalShow, setModalShow] = useState(false);
 
-  function handleClickJoinMail(
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) {
+  function handleClickJoinMail(e: React.MouseEvent) {
     e.preventDefault();
     setModalShow(true);
   }

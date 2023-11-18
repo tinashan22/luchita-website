@@ -11,6 +11,7 @@ import { formatCurrencyString, useShoppingCart } from "use-shopping-cart";
 import CartItem from "./cartItem";
 import Image from "next/image";
 import cart from "../../../public/icons/cart.svg";
+import Link from "next/link";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -23,6 +24,8 @@ const projectUrl = process.env.NEXTAUTH_URL;
 
 export default function CartPage() {
   const { cartCount, cartDetails, totalPrice } = useShoppingCart();
+  const cartIsEmpty = cartCount == undefined || cartCount === 0;
+
   console.log("cartCount", cartCount);
   console.log("cartDetails", cartDetails);
   return (
@@ -39,24 +42,27 @@ export default function CartPage() {
         ) : (
           <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden">
             <Image className="w-[24px] " src={cart} alt="share this product" />
-            <p className="mt-6 text-center text-2xl font-bold">
+            <p className="text-roboto mt-2 text-center text-xl font-md mb-6">
               Your cart is empty.
             </p>
           </div>
         )}
       </div>
-
-      <div className="w-full border border-brandPurple "></div>
+      <div className="w-full border border-brandPurple h-[1px] mt-4"></div>
       <h1 className="font-roboto text-lg font-medium pt-4">
         {" "}
-        Total:{" "}
+        Subtotal:{" "}
         {formatCurrencyString({ value: totalPrice || 0, currency: "USD" })}
       </h1>
       <p className="font-roboto text-sm pt-3 pb-8">
         Shipping & taxes calculated at checkout.
       </p>
+
       <LargeButton
-        handleClick={() => {}}
+        handleClick={(e) => {
+          alert("hi");
+        }}
+        disabled={cartCount == undefined || cartCount === 0}
         type={ButtonType.LargePrimary}
         btnText="Check out"
       ></LargeButton>
