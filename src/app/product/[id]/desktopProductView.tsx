@@ -11,6 +11,7 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { framerLogger } from "@/stateLogger";
 import EmailSignUpModal from "@/components/emailSignUpModal";
+import { useShoppingCart } from "use-shopping-cart";
 
 export default function DesktopProductView({
   product,
@@ -27,6 +28,8 @@ export default function DesktopProductView({
     e.preventDefault();
     setModalShow(true);
   }
+
+  const { addItem } = useShoppingCart();
 
   return (
     <div className="hidden md:block ">
@@ -69,6 +72,33 @@ export default function DesktopProductView({
             }}
           />
           <div className="h-[12px]"></div> */}
+
+          <LargeButton
+            key="add to cart"
+            type={ButtonType.LargeSecondary}
+            btnText="Add to cart"
+            // handleClick={() => {
+            //   handleClickJoinMail(e);
+            // }}
+            handleClick={(e) =>
+              addItem(
+                {
+                  // Line item name to be shown on the Stripe Checkout page
+                  name: product!.name,
+                  // Optional description to be shown on the Stripe Checkout page
+                  description: product!.description,
+                  // A unique identifier for this item (stock keeping unit)
+                  sku: product!.id,
+                  // price in smallest currency unit (e.g. cent for USD)
+                  price: product!.price * 100,
+                  currency: "USD",
+                  // Optional image to be shown on the Stripe Checkout page
+                  image: product!.primaryPhoto,
+                },
+                { count: 1 }
+              )
+            }
+          />
 
           <LargeButton
             key="secondary"

@@ -31,6 +31,7 @@ export default function ProductLayout({
         displayOrder: product.displayOrder,
         isDeleted: product.isDeleted,
       };
+
       setProduct(currentProduct);
     });
   }, []);

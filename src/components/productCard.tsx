@@ -72,7 +72,6 @@ export default function ProductCard({ product }: { product: ProductRecord }) {
             </div>
 
             <p className="font-garamond text-lg">${product.price}</p>
-            {/* <p className="font-garamond text-xs">order: {product.displayOrder}</p> */}
           </div>
         </div>
       </Link>

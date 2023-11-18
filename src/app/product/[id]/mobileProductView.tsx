@@ -14,6 +14,7 @@ import ProductBreadcrumb from "./breadcrumb";
 import { AnimatePresence, motion } from "framer-motion";
 import EmailSignUpModal from "@/components/emailSignUpModal";
 import { framerLogger } from "@/stateLogger";
+import Link from "next/link";
 
 export default function MobileProductView({
   product,
@@ -103,16 +104,22 @@ export default function MobileProductView({
         })}
       </Swiper>
       <ProductInfoText product={product} />
-      {/* <LargeButton
-        key="primary"
-        type={ButtonType.LargePrimary}
-        btnText="Buy now"
-        handleClick={() => {
-          alert("go to checkout");
-        }}
-      />
-      <div className="h-[12px]"></div> */}
 
+      <Link
+        href={{
+          pathname: "/checkout",
+          // query: JSON.stringify(product),
+        }}
+      >
+        <LargeButton
+          key="primary"
+          type={ButtonType.LargePrimary}
+          btnText="Buy now"
+          handleClick={() => {}}
+        />
+      </Link>
+      <div className="h-[12px]"></div>
+      {/* JOIN MAILING LIST BUTTON*/}
       <LargeButton
         key="secondary"
         type={ButtonType.LargeSecondary}

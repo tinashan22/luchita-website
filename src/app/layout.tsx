@@ -2,6 +2,7 @@ import MobileNav from "@/components/nav";
 import "./globals.css";
 import { EB_Garamond, Righteous, Roboto } from "next/font/google";
 import { AuthProvider } from "@/context/authContext";
+import CartProvider from "@/context/cartProvider";
 
 const righteous = Righteous({
   weight: ["400"],
@@ -42,8 +43,10 @@ export default function RootLayout({
         className={`${righteous.variable} ${roboto.variable} ${garamond.variable}`}
       >
         <AuthProvider>
-          <MobileNav />
-          <div className="mt-14"> {children}</div>
+          <CartProvider>
+            <MobileNav />
+            <div className="mt-14"> {children}</div>
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>
