@@ -119,7 +119,7 @@ export default function AccountPage() {
             type="submit"
           />
         </form>
-        <div className="flex justify-center font-garamond pt-2 pl-1 text-base text-brandPurple opacity-90 ">
+        <div className="flex justify-center font-garamond pt-2 pl-1 text-base text-brandPurple md:opacity-70 hover:opacity-100 ">
           <Link href="/login">
             {" "}
             ☞ Log in here if you already have an account

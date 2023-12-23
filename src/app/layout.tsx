@@ -1,4 +1,4 @@
-import MobileNav from "@/components/nav";
+import GlobalNav from "@/components/nav";
 import "./globals.css";
 import { EB_Garamond, Righteous, Roboto } from "next/font/google";
 import { AuthProvider } from "@/context/authContext";
@@ -44,7 +44,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           <CartProvider>
-            <MobileNav />
+            <GlobalNav />
             <div className="mt-14"> {children}</div>
           </CartProvider>
         </AuthProvider>

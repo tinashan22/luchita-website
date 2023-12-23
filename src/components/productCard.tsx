@@ -11,10 +11,19 @@ import Link from "next/link";
 
 export default function ProductCard({ product }: { product: ProductRecord }) {
   const [modalShow, setModalShow] = useState(false);
+  const [imageURL, setImageURL] = useState(`${product.primaryPhoto}`);
 
   function handleClickPreviewIcon(e: MouseEvent) {
     e.preventDefault();
     setModalShow(true);
+  }
+
+  function onMouseOver() {
+    setImageURL(`${product.photoList[1]}`);
+  }
+
+  function onMouseLeave() {
+    setImageURL(`${product.primaryPhoto}`);
   }
 
   return (
@@ -43,18 +52,43 @@ export default function ProductCard({ product }: { product: ProductRecord }) {
       </AnimatePresence>
 
       <Link href={`/product/${product.id}`}>
-        <div className="flex-col ">
+        <div
+          onMouseEnter={onMouseOver}
+          onMouseLeave={onMouseLeave}
+          className="flex-col "
+        >
           <div className="relative w-full h-56 md:h-96 ">
             <Image
-              src={`${product.primaryPhoto}`}
+              src={imageURL}
               alt="product primary photo"
-              className="rounded-xl object-cover border border-brandPurple   transition-opacity delay-150 ease-in duration-1000"
+              className="rounded-xl object-cover border border-brandPurple   transition-opacity delay-150 ease-in duration-1000 "
               fill={true}
               sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
               draggable={false}
               placeholder={"blur"}
               blurDataURL="/placeholder.png"
             />
+            {/* hover image */}
+            {/* <Image
+              src={`${product.photoList[1]}`}
+              alt="product primary photo"
+              className="rounded-xl object-cover border border-brandPurple   transition-opacity delay-150 ease-in duration-1000 "
+              fill={true}
+              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+              draggable={false}
+              placeholder={"blur"}
+              blurDataURL="/placeholder.png"
+            />
+            <Image
+              src={`${product.primaryPhoto}`}
+              alt="product primary photo"
+              className="rounded-xl object-cover border border-brandPurple   transition-opacity delay-150 ease-in duration-1000 hover:hidden focus-within:hidden"
+              fill={true}
+              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+              draggable={false}
+              placeholder={"blur"}
+              blurDataURL="/placeholder.png"
+            /> */}
           </div>
           <div className="px-1 pt-3">
             <div className=" flex flex-row justify-between">

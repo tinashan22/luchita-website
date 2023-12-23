@@ -14,7 +14,7 @@ export default function CartLayout({
     window.scrollTo(0, 0);
   }, []);
   return (
-    <main className="min-h-screen pt-8 bg-brandCream  selection:bg-brandPink text-brandPurple w-screen px-6">
+    <main className="min-h-screen pt-8 bg-brandCream  selection:bg-brandPink text-brandPurple w-screen px-6 md:px-20">
       <CartPage />
       {/* <FloatingMenu /> */}
     </main>

@@ -67,14 +67,14 @@ const logoNavAnimationVariants = isMobile
     }
   : {
       hidden: {
-        x: "-50vw",
+        x: "-30vw",
         opacity: 0.2,
       },
       visible: {
         x: "0px",
         opacity: 1,
         transition: {
-          duration: 0.2,
+          duration: 0.6,
           type: "spring",
           damping: 15,
           stiffness: 100,
@@ -89,7 +89,7 @@ const logoNavAnimationVariants = isMobile
       },
     };
 
-export default function MobileNav() {
+export default function GlobalNav() {
   //log in status
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const { authUser, currentUserRecord } = useContext(AuthContext);
@@ -105,7 +105,7 @@ export default function MobileNav() {
   const [isTopOfPage, setTopOfPage] = useState(true);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 20) {
+    if (latest > 30) {
       setTopOfPage(false);
     } else {
       setTopOfPage(true);
@@ -135,7 +135,7 @@ export default function MobileNav() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="flex items-center justify-between w-full px-5"
+            className="flex items-center justify-between w-full px-5 md:px-20"
           >
             <Link href="/">
               <p className={`font-righteous text-xl text-brandPurple`}>

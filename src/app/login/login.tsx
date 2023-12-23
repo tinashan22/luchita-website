@@ -25,7 +25,6 @@ export default function LoginPage({
     setFormFields({ ...formFields, [name]: value });
   };
 
-  //rewrite
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -35,12 +34,11 @@ export default function LoginPage({
       if (logInApiRes === "success") {
         resetFormFields();
         router.push("/profile");
-        //go to log in page with email account
       } else {
         switch (logInApiRes) {
           case "auth/wrong-password":
             console.log("wrong password", logInApiRes);
-            // alert("Wrong password. Please try again");
+
             setSignInMsg("Wrong password. Please try again.");
 
             break;
@@ -89,7 +87,7 @@ export default function LoginPage({
       <div className="max-w-[420px] flex-col justify-center items-center">
         <h1 className="font-roboto text-2xl font-medium pb-3 ">
           {" "}
-          Log in to see your favorite designs
+          Log in to save your favorite designs
         </h1>
         <form action="Log in with email and password" onSubmit={handleSubmit}>
           <label className="text-xs font-roboto opacity-80" title="email">
@@ -134,7 +132,7 @@ export default function LoginPage({
           />
         </form>
       </div>
-      <div className="flex justify-center font-garamond pt-2 pl-1 text-base text-brandPurple opacity-90">
+      <div className="flex justify-center font-garamond pt-2 pl-1 text-base text-brandPurple md:opacity-70 hover:opacity-100">
         <Link href="/createAccount"> ☞ New kid? Click here to sign up</Link>
       </div>
     </div>

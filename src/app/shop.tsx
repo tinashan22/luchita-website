@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { getAllProducts } from "../firebase/firestore";
 import FloatingMenu from "@/components/floatingMenu";
 import PlaceholderProductCard from "@/components/placeholderProductCard";
+import CopyrightLine from "@/components/copyright";
 
 // const mockProducts = [
 //   {
@@ -77,8 +78,7 @@ export default function ShopPage() {
 
   return (
     // page container
-
-    <div className="relative w-full flex justify-center  pt-8 px-5 md:px-20 md:pt-28 pb-32 ">
+    <div className="relative w-full flex-col justify-center  pt-8 px-5 md:px-20 md:pt-16">
       <div className="max-w-[1352px] w-full">
         {/* skeleton loading grid */}
         {isLoading && (
@@ -90,12 +90,18 @@ export default function ShopPage() {
         )}
         {/* product grid */}
         {!isLoading && (
-          <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-x-5 gap-y-8 ">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-x-5 gap-y-8">
             {products?.map((p: ProductRecord) => {
               return <ProductCard key={p.id} product={p} />;
             })}
           </div>
         )}
+      </div>
+
+      {/* product grid pb 32 */}
+      <div className="pt-32 pb-32 lg:pb-6">
+        {" "}
+        <CopyrightLine />{" "}
       </div>
 
       {/* page bg */}

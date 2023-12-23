@@ -97,6 +97,7 @@ export default function DesktopProductView({
               )
             }
           />
+          <div className="h-[12px]"></div>
 
           <LargeButton
             key="secondary"

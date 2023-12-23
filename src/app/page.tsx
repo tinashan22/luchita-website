@@ -1,7 +1,7 @@
 "use client";
 
 import ShopPage from "./shop";
-import MobileNav from "../components/nav";
+import GlobalNav from "../components/nav";
 import FloatingMenu from "../components/floatingMenu";
 import { AuthProvider } from "@/context/authContext";
 import { loadStripe } from "@stripe/stripe-js";
@@ -33,7 +33,7 @@ export default function Home() {
   // };
 
   return (
-    <main className="flex min-h-screen  text-brandPurple selection:bg-brandPink">
+    <main className="flex min-h-screen h-dvh text-brandPurple selection:bg-brandPink">
       {/* <AuthProvider> */}
 
       <ShopPage />

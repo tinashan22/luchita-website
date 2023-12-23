@@ -20,7 +20,7 @@ export default function CartButton() {
           {" "}
           <Image className="w-[24px] " src={cart} alt="share this product" />
           {cartNumber && cartNumber > 0 && (
-            <div className="absolute top-[-8px] right-[-8px] h-[16px] w-[16px] border-[0.5px] rounded-[50%] border-brandLime bg-brandPurple flex justify-center">
+            <div className="absolute top-[-4px] right-[-5px] h-[16px] w-[16px] border-[0.5px] rounded-[50%] border-brandLime bg-brandPurple flex justify-center">
               <p className="text-[10px]  text-brandLime">
                 {cartCount!.toString()}
               </p>
