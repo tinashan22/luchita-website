@@ -9,6 +9,7 @@ import DesktopProductView from "./desktopProductView";
 import { getProductById } from "@/firebase/firestore";
 import MobileProductView from "./mobileProductView";
 import ProductBreadcrumb from "./breadcrumb";
+import FloatingMenu from "@/components/floatingMenu";
 
 export default function ProductLayout({
   params,
@@ -31,6 +32,7 @@ export default function ProductLayout({
         displayOrder: product.displayOrder,
         isDeleted: product.isDeleted,
       };
+
       setProduct(currentProduct);
     });
   }, []);
@@ -46,6 +48,7 @@ export default function ProductLayout({
       <DesktopProductView product={product} />
       {/* mobile product page */}
       <MobileProductView product={product} />
+      <FloatingMenu />
     </div>
   );
 }

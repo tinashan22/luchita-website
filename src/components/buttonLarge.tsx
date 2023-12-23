@@ -3,12 +3,16 @@ import { ButtonType } from "@/constants";
 interface ButtonProps {
   type: ButtonType;
   btnText: string;
-  handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  disabled?: boolean | undefined;
+  handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  //handleClick2?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function LargeButton({
   type,
   btnText,
+  disabled,
+
   handleClick,
 }: ButtonProps) {
   //   function renderButton() {
@@ -48,9 +52,7 @@ export default function LargeButton({
   return (
     <>
       {/* {renderButton()} */}
-
       <div
-        onClick={handleClick}
         className={`${
           type === ButtonType.LargePrimary && "bg-brandPurple border-brandLime"
         }
@@ -62,15 +64,20 @@ export default function LargeButton({
         
             flex items-center justify-center rounded-[20px] h-[48px] border`}
       >
-        <p
-          className={`
-        
+        <button
+          onClick={handleClick}
+          disabled={disabled}
+          className={`w-full ${disabled && "opacity-20"}  `}
+        >
+          <p
+            className={`
         ${type === ButtonType.LargePrimary && "text-brandLime"}
           ${type === ButtonType.LargeSecondary && "text-brandPurple"}
          font-righteous text-lg py-3 `}
-        >
-          {btnText}
-        </p>
+          >
+            {btnText}
+          </p>
+        </button>
       </div>
     </>
   );

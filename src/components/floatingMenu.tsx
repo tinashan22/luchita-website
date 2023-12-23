@@ -1,11 +1,15 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import InstagramButton from "./instagranBtn";
+import InstagramButton from "./instagramBtn";
+import Image from "next/image";
+import cart from "../../public/icons/cart.svg";
+import CartButton from "./cartBtn";
 
 export default function FloatingMenu() {
   const pathname = usePathname();
-  const isCommissionPage = pathname.startsWith("/commission");
+  const isCommissionPage = (pathname ?? "/").startsWith("/commission");
+
   return (
     <div className="bg-brandPink h-14 left-4 lg:left-3/4 right-4 fixed  bottom-4 flex place-items-center border border-brandPurple shadow-btn shadow-brandPurple rounded-3xl z-10">
       <div className="flex flex-row w-full justify-between items-center  pl-6 pr-4 ">
@@ -15,7 +19,7 @@ export default function FloatingMenu() {
           </Link>
         )}
         {!isCommissionPage && (
-          <Link href="/commission">
+          <Link href="/commission" prefetch={false}>
             <p className={`font-roboto font-medium text-brandPurple`}>
               Commission
             </p>
@@ -23,10 +27,9 @@ export default function FloatingMenu() {
         )}
 
         <div className="flex flex-row space-between">
-          {/* <div className="w-[12px]"></div>
-          <InstagramButton /> */}
-          <div className="w-[12px]"></div>
           <InstagramButton />
+          <div className="w-[12px]"></div>
+          <CartButton />
         </div>
       </div>
     </div>

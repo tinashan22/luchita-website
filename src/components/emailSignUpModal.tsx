@@ -8,9 +8,7 @@ import { motion } from "framer-motion";
 import { createEmailSubscriber } from "@/firebase/firestore";
 
 type EmailSignUpModalProps = {
-  handleCloseModal: (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => void;
+  handleCloseModal: (event: React.MouseEvent) => void;
 };
 
 const animationVariants = {

@@ -6,10 +6,13 @@ import { useEffect, useRef } from "react";
 import ImageWithBorder from "./imageWithBorder";
 import CommissionPageGridRight from "./gridRight";
 import { CommissionPageGridLeft } from "./gridLeft";
+import CopyrightLine from "@/components/copyright";
 
 export default function CommissionPage() {
   return (
     <div className="h-full w-full flex flex-col ">
+      {/* Text Grid */}
+
       <div className="px-4 md:px-20 pt-6  grid grid-cols-1 md:grid-cols-3 md:gap-x-5 gap-y-3">
         <h1 className="font-roboto text-2xl font-medium"> Commission</h1>
         <p className="font-garamond text-xl md:pb-0 ">
@@ -35,23 +38,30 @@ export default function CommissionPage() {
         </p>
       </div>
 
-      <CommissionPageGridRight
-        productName="holdMeUp"
-        description="A playful reference to pop culture, this representational design makes us smile with delight."
-      />
+      <div className="pb-32">
+        <CommissionPageGridRight
+          productName="holdMeUp"
+          description="A playful reference to pop culture, this representational design makes us smile with delight."
+        />
 
-      <CommissionPageGridLeft
-        productName="jellyfish"
-        description="Taking inspiration from luminescent deep sea creatures, this brooch brings the refreshing ocean breeze and summer vibes."
-      />
-      <CommissionPageGridRight
-        productName="corndog"
-        description="Nicknamed “corndog”, this earring is both playful and elegant, holding space on its own."
-      />
-      <CommissionPageGridLeft
-        productName="other"
-        description="Various personalized designs for spirits warm and cool."
-      />
+        <CommissionPageGridLeft
+          productName="jellyfish"
+          description="Taking inspiration from luminescent deep sea creatures, this brooch brings the refreshing ocean breeze and summer vibes."
+        />
+        <CommissionPageGridRight
+          productName="corndog"
+          description="Nicknamed “corndog”, this earring is both playful and elegant, holding space on its own."
+        />
+        <CommissionPageGridLeft
+          productName="other"
+          description="Various personalized designs for spirits warm and cool."
+        />
+      </div>
+
+      <div className="pt-0 pb-32 lg:pb-4 px-4 md:px-20 ">
+        {" "}
+        <CopyrightLine />{" "}
+      </div>
     </div>
   );
 }

@@ -14,6 +14,8 @@ import ProductBreadcrumb from "./breadcrumb";
 import { AnimatePresence, motion } from "framer-motion";
 import EmailSignUpModal from "@/components/emailSignUpModal";
 import { framerLogger } from "@/stateLogger";
+import Link from "next/link";
+import { useShoppingCart } from "use-shopping-cart";
 
 export default function MobileProductView({
   product,
@@ -24,12 +26,13 @@ export default function MobileProductView({
   const router = useRouter();
   const [modalShow, setModalShow] = useState(false);
 
-  function handleClickJoinMail(
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) {
+  function handleClickJoinMail(e: React.MouseEvent) {
     e.preventDefault();
     setModalShow(true);
   }
+
+  const { addItem } = useShoppingCart();
+
   // useEffect(() => {
   //   const swiperContainer = swiperRef.current;
   //   const params = {
@@ -103,16 +106,41 @@ export default function MobileProductView({
         })}
       </Swiper>
       <ProductInfoText product={product} />
-      {/* <LargeButton
-        key="primary"
-        type={ButtonType.LargePrimary}
-        btnText="Buy now"
-        handleClick={() => {
-          alert("go to checkout");
-        }}
-      />
-      <div className="h-[12px]"></div> */}
 
+      <Link
+        href={{
+          pathname: "/checkout",
+        }}
+      ></Link>
+      <div className="h-[12px]"></div>
+      <LargeButton
+        key="add to cart"
+        type={ButtonType.LargePrimary}
+        btnText="Add to cart"
+        // handleClick={() => {
+        //   handleClickJoinMail(e);
+        // }}
+        handleClick={(e) =>
+          addItem(
+            {
+              // Line item name to be shown on the Stripe Checkout page
+              name: product!.name,
+              // Optional description to be shown on the Stripe Checkout page
+              description: product!.description,
+              // A unique identifier for this item (stock keeping unit)
+              sku: product!.id,
+              // price in smallest currency unit (e.g. cent for USD)
+              price: product!.price * 100,
+              currency: "USD",
+              // Optional image to be shown on the Stripe Checkout page
+              image: product!.primaryPhoto,
+            },
+            { count: 1 }
+          )
+        }
+      />
+      <div className="h-[12px]"></div>
+      {/* JOIN MAILING LIST BUTTON*/}
       <LargeButton
         key="secondary"
         type={ButtonType.LargeSecondary}
@@ -121,7 +149,8 @@ export default function MobileProductView({
           handleClickJoinMail(e);
         }}
       />
-      <div className="h-[54px]"></div>
+
+      <div className="h-[96px]"></div>
     </motion.div>
   );
 }
