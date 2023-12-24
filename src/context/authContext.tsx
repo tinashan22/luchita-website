@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: Props) => {
   const [authUser, setAuthUser] = useState<User | null>(null);
   const [currentUserRecord, setCurrentUserRecord] = useState<UserRecord | null>(
     () => {
-      const userData = sessionStorage.getItem(SessionStorageKey.UserRecord);
+      const userData = sessionStorage.getItem(SessionStorageKey.UserRecord)
       if (!userData) {
         return null;
       }

@@ -1,79 +1,38 @@
 "use client";
 
-import { ProductRecord } from "@/interfaces";
-import { Elements, PaymentElement } from "@stripe/react-stripe-js";
-import React from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import getStripe from "@/utils/getStripe";
-import LargeButton from "@/components/buttonLarge";
-import { ButtonType } from "@/constants";
+import { useState, useMemo } from "react";
 import { formatCurrencyString, useShoppingCart } from "use-shopping-cart";
 import CartItem from "./cartItem";
 import Image from "next/image";
 import cart from "../../../public/icons/cart.svg";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-// const stripePromise = loadStripe(
-//   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-// );
-
-// const stripePromise = getStripe();
-const projectUrl = process.env.NEXTAUTH_URL;
-
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-);
+import { CreateCheckoutSession } from "../actions/stripe";
 
 export default function CartPage() {
   const { cartCount, cartDetails, totalPrice } = useShoppingCart();
   const cartIsEmpty = cartCount == undefined || cartCount === 0;
   const router = useRouter();
 
-  const redirectToCheckout = async () => {
-    try {
-      const stripe = await getStripe();
-
-      console.log("STRIPE35", stripe);
-
-      if (!stripe) throw new Error("Stripe failed to initialize.");
-
-      const checkoutResponse = await fetch("/api/checkoutSessions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+  const lineItems = useMemo(() => {
+    let items = [];
+    for (const id in cartDetails) {
+      const cartItem = cartDetails[id];
+      const data = {
+        quantity: cartItem.quantity,
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: cartItem.name,
+          },
+          unit_amount: cartItem.price,
         },
-        body: JSON.stringify({ price: 100, id: "1234yreudhsjakyd" }),
-      });
-
-      const res = await checkoutResponse.json();
-      console.log(res, "session");
-
-      //   const stripeError = await stripe.redirectToCheckout({ session.sessionId });
-
-      //   if (stripeError) {
-      //     console.error(stripeError);
-      //   }
-    } catch (error) {
-      console.error(error);
+      };
+      items.push(data);
     }
-  };
+    return items;
+  }, [cartDetails]);
 
-  React.useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success")) {
-      console.log("Order placed! You will receive an email confirmation.");
-    }
-
-    if (query.get("canceled")) {
-      console.log(
-        "Order canceled -- continue to shop around and checkout when you’re ready."
-      );
-    }
-  }, []);
+  const [loading] = useState<boolean>(false);
 
   return (
     <div className="flex  w-full md:justify-end">
@@ -117,53 +76,18 @@ export default function CartPage() {
           <p className="font-roboto text-sm pt-3 pb-8">
             Shipping & taxes calculated at checkout.
           </p>
-          <div className="  w-full md:w-[280px]">
-            <LargeButton
-              handleClick={() => {
-                redirectToCheckout();
-                // alert("Checkout function coming soon! ❤︎");
-              }}
-              disabled={cartCount == undefined || cartCount === 0}
-              type={ButtonType.LargePrimary}
-              btnText="Checkout"
-            ></LargeButton>
-          </div>
 
-          {/* START STRIPE CODE */}
-          <form action="/api/checkout_sessions" method="POST">
-            <section>
-              <button type="submit" role="link">
+          <div className="w-full md:w-[280px]">
+            <form action={(e) => CreateCheckoutSession(e, lineItems)}>
+              <button
+                className="w-full bg-brandPurple border-brandLime text-brandLime flex items-center justify-center rounded-[20px] h-[48px] border font-righteous text-lg py-3"
+                type="submit"
+                disabled={loading || !cartCount}
+              >
                 Checkout
               </button>
-            </section>
-            <style jsx>
-              {`
-                section {
-                  background: #ffffff;
-                  display: flex;
-                  flex-direction: column;
-                  width: 400px;
-                  height: 112px;
-                  border-radius: 6px;
-                  justify-content: space-between;
-                }
-                button {
-                  height: 36px;
-                  background: #556cd6;
-                  border-radius: 4px;
-                  color: white;
-                  border: 0;
-                  font-weight: 600;
-                  cursor: pointer;
-                  transition: all 0.2s ease;
-                  box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
-                }
-                button:hover {
-                  opacity: 0.8;
-                }
-              `}
-            </style>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>

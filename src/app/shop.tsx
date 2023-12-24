@@ -78,7 +78,7 @@ export default function ShopPage() {
 
   return (
     // page container
-    <div className="relative w-full flex-col justify-center  pt-8 px-5 md:px-20 md:pt-16">
+    <div className="relative w-full flex-col justify-center pt-8 px-5 md:px-20 md:pt-16">
       <div className="max-w-[1352px] w-full">
         {/* skeleton loading grid */}
         {isLoading && (

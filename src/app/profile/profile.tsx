@@ -24,7 +24,7 @@ export default function ProfilePage() {
 
       <div className="font-roboto text-sm pt-1">
         {" "}
-        You've been a lucha luchita member since {date.getMonth().toString()}/
+        You`&lsquo;`ve been a lucha luchita member since {date.getMonth().toString()}/
         {date.getDate().toString()}/{date.getFullYear().toString()}.
       </div>
       <div className="border border-dashed rounded-lg p-8 mt-8 border-brandPurple">

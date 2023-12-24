@@ -33,7 +33,7 @@ export default function Home() {
   // };
 
   return (
-    <main className="flex min-h-screen h-dvh text-brandPurple selection:bg-brandPink">
+    <main className="flex min-h-screen text-brandPurple selection:bg-brandPink">
       {/* <AuthProvider> */}
 
       <ShopPage />
