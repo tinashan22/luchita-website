@@ -23,6 +23,7 @@ export default function CartPage() {
           currency: "usd",
           product_data: {
             name: cartItem.name,
+            sku: cartItem.sku, //product_id on firebase db
           },
           unit_amount: cartItem.price,
         },

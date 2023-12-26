@@ -33,22 +33,20 @@ export default function MobileProductView({
 
   const { addItem } = useShoppingCart();
 
-  // useEffect(() => {
-  //   const swiperContainer = swiperRef.current;
-  //   const params = {
-  //     navigation: true,
-  //     pagination: true,
-  //     injectStyles: [
-  //       `
-  //         .swiper-pagination-bullet{
-  //           width: 10px;
-  //           height: 10px;
-  //           background-color: rgb(55,31,59);
-  //         }
-  //     `,
-  //     ],
-  //   };
-  // }, []);
+  const [cartBtnText, setCartBtnText] = useState("Add to cart");
+  const [cartBtnIsDisabled, setCartBtnIsDisabled] = useState(false);
+
+  async function updateBtnState() {
+    setCartBtnText("Added to your cart");
+
+    setCartBtnIsDisabled(true);
+
+    setTimeout(() => {
+      setCartBtnText("Add to cart");
+      setCartBtnIsDisabled(false);
+    }, 1800);
+  }
+
   return (
     <motion.div className=" md:hidden">
       <AnimatePresence
@@ -95,7 +93,7 @@ export default function MobileProductView({
                 <Image
                   key={index}
                   src={photoUrl}
-                  alt="home page bg"
+                  alt={product.name}
                   className=" object-cover  "
                   fill={true}
                   draggable={false}
@@ -116,11 +114,9 @@ export default function MobileProductView({
       <LargeButton
         key="add to cart"
         type={ButtonType.LargePrimary}
-        btnText="Add to cart"
-        // handleClick={() => {
-        //   handleClickJoinMail(e);
-        // }}
-        handleClick={(e) =>
+        btnText={cartBtnText}
+        disabled={cartBtnIsDisabled}
+        handleClick={(e) => {
           addItem(
             {
               // Line item name to be shown on the Stripe Checkout page
@@ -136,8 +132,9 @@ export default function MobileProductView({
               image: product!.primaryPhoto,
             },
             { count: 1 }
-          )
-        }
+          );
+          updateBtnState();
+        }}
       />
       <div className="h-[12px]"></div>
       {/* JOIN MAILING LIST BUTTON*/}

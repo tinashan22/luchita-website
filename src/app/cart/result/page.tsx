@@ -1,6 +1,10 @@
 import type { Stripe } from "stripe";
 import PrintObject from "@/components/printObject";
 import { stripe } from "@/lib/stripe";
+import OrderSuccessPage from "./success";
+import { useShoppingCart } from "use-shopping-cart";
+import { clear } from "console";
+import LargeButton from "@/components/buttonLarge";
 
 export default async function ResultPage({
   searchParams,
@@ -17,11 +21,23 @@ export default async function ResultPage({
 
   const paymentIntent = checkoutSession.payment_intent as Stripe.PaymentIntent;
 
+  const succeeded = paymentIntent.status === "succeeded";
+
   return (
     <main className="min-h-screen pt-8 bg-brandCream text-brandPurple">
-      <h2>Status: {paymentIntent.status}</h2>
-      <h3 className="">Checkout Session response:</h3>
-      <PrintObject content={checkoutSession} />
+      {succeeded ? (
+        <OrderSuccessPage
+          orderNumber={checkoutSession.id}
+          email={checkoutSession.customer_email}
+        />
+      ) : null}
+      {/* 
+      {checkoutSession.line_items?.data.map((item, index) => {
+        return <div key={index}>{item.description}</div>;
+      })} */}
+
+      {/* <h3>Checkout Session response:</h3>
+      <PrintObject content={checkoutSession} /> */}
     </main>
   );
 }
