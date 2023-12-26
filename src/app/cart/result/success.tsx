@@ -22,7 +22,7 @@ export default function OrderSuccessPage({
       <div> Thank you for your order. </div>
       {email && <div>A confirmation email will be sent to {email}.</div>}
 
-      <p className="text-sm text-wrap">Order number: {orderNumber}</p>
+      <p className="text-wrap">Order number: {orderNumber}</p>
       <div className="h-[24px]"></div>
       <Link href="/">
         {" "}
