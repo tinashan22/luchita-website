@@ -15,7 +15,7 @@ export default function CartButton() {
   }, [cartCount]);
   return (
     <div>
-      <Link href="/cart">
+      <Link href="/cart" prefetch={false}>
         <div className="w-[24px] h-[24px] relative ">
           {" "}
           <Image className="w-[24px] " src={cart} alt="share this product" />

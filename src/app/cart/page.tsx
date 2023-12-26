@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import FloatingMenu from "../../components/floatingMenu";
 import CartPage from "./cart";
-import Modal from "@/components/modal/Modal";
 
 export default function CartLayout({
   params,
