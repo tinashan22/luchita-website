@@ -13,8 +13,10 @@ import FloatingMenu from "@/components/floatingMenu";
 
 export default function ProductLayout({
   params,
+  emailModal,
 }: {
   params: { id: string; product: ProductRecord };
+  emailModal: React.ReactNode;
 }) {
   const [product, setProduct] = useState<ProductRecord>();
 
@@ -49,6 +51,7 @@ export default function ProductLayout({
       {/* mobile product page */}
       <MobileProductView product={product} />
       <FloatingMenu />
+      {emailModal}
     </div>
   );
 }

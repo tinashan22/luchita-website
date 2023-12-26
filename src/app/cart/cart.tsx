@@ -40,11 +40,11 @@ export default function CartPage() {
         onClick={() => {
           router.back();
         }}
-        className="fixed top-[72px] right-[24px] md:right-[80px] font-garamond text-sm opacity-70 hover:opacity-100"
+        className="fixed top-[72px] right-[24px] md:right-[80px] font-garamond text-sm cursor-pointer opacity-70 p-1 hover:opacity-100 "
       >
-        {" "}
-        Close{" "}
+        Close
       </div>
+
       <div className="w-[420px] md:max-w-[640px]">
         <h1 className="font-righteous text-lg font-medium"> Shopping Cart</h1>
         <div>
@@ -74,13 +74,13 @@ export default function CartPage() {
             {formatCurrencyString({ value: totalPrice || 0, currency: "USD" })}
           </h1>
           <p className="font-roboto text-sm pt-3 pb-8">
-            Shipping & taxes calculated at checkout.
+            Shipping & taxes calculated at checkout
           </p>
 
           <div className="w-full md:w-[280px]">
             <form action={(e) => CreateCheckoutSession(e, lineItems)}>
               <button
-                className="w-full bg-brandPurple border-brandLime text-brandLime flex items-center justify-center rounded-[20px] h-[48px] border font-righteous text-lg py-3"
+                className="w-full bg-brandPurple border-brandLime text-brandLime hover:bg-brandLime hover:border-brandPurple hover:text-brandPurple transition-colors flex items-center justify-center rounded-[20px] h-[48px] border font-righteous text-lg py-3"
                 type="submit"
                 disabled={loading || !cartCount}
               >

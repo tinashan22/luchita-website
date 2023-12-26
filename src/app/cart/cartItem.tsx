@@ -3,20 +3,27 @@ import { useShoppingCart } from "use-shopping-cart";
 import removeItemIcon from "../../../public/remove-item.png";
 import Image from "next/image";
 import { CartEntry, formatCurrencyString } from "use-shopping-cart/core";
+import { useState } from "react";
 
 export default function CartItem({ item }: { item: CartEntry }) {
   const { name, quantity, price } = item;
 
   const { removeItem } = useShoppingCart();
 
+  const [showRemoveBtn, setRemoveBtnShow] = useState(false);
+
   const handleRemoveItem = () => {
     removeItem(item.id);
   };
   return (
-    <div className="flex flex-col mt-7">
+    <div
+      onMouseEnter={() => setRemoveBtnShow(true)}
+      onMouseLeave={() => setRemoveBtnShow(false)}
+      className="flex flex-col mt-7"
+    >
       <div className="flex justify-between">
         {" "}
-        <div className="">
+        <div className="flex  ">
           <Image
             className="rounded-lg h-[88px] width-[88px] border border-brandPurple "
             style={{ objectFit: "cover" }}
@@ -25,28 +32,35 @@ export default function CartItem({ item }: { item: CartEntry }) {
             src={item.image ?? ""}
             alt={`product image for ${item.name}`}
           ></Image>
-        </div>
-        <div className="flex flex-col justify-start">
-          <div className="text-roboto font-medium text-md">{name}</div>
-          <div className="h-[16px]"></div>
+          {/* Beginning of Product Info Column */}
+          <div className="flex flex-col justify-start ml-4">
+            <div className="font-roboto font-medium text-md">{name}</div>
+            <div className="h-[16px]"></div>
 
-          <div>quantity: {quantity}</div>
-          <div>
-            {" "}
-            price: {formatCurrencyString({ value: price, currency: "USD" })}
+            <div className="font-garamond ">quantity: {quantity}</div>
+            <div className="font-garamond ">
+              {" "}
+              price: {formatCurrencyString({ value: price, currency: "USD" })}
+            </div>
           </div>
+          {/* End of Product Info Column */}
         </div>
-        <button
-          onClick={() => handleRemoveItem()}
-          className="hover:bg-emerald-50 transition-colors rounded-full duration-500 p-1"
-        >
-          <Image
-            height={16}
-            width={16}
-            src={removeItemIcon}
-            alt="remove cart item"
-          ></Image>
-        </button>
+        <div className="flex flex-col items-start">
+          {" "}
+          <button
+            onClick={() => handleRemoveItem()}
+            className="hover:bg-brandPink hover:border-brandPurple transition-colors rounded-full duration-500 p-2"
+          >
+            {showRemoveBtn && (
+              <Image
+                height={12}
+                width={12}
+                src={removeItemIcon}
+                alt="remove cart item"
+              ></Image>
+            )}
+          </button>
+        </div>
       </div>
       <div className="w-full border border-brandPurple h-[1px] mt-7"></div>
     </div>
