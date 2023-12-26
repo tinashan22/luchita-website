@@ -9,7 +9,7 @@ export default function CommissionLayout() {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <main className="flex min-h-screen h-full text-brandPurple bg-brandPink background-grid pb-32 selection:bg-brandLime ">
+    <main className="flex min-h-screen h-full text-brandPurple bg-brandPink background-grid  selection:bg-brandLime ">
       <CommissionPage />
       <FloatingMenu />
     </main>

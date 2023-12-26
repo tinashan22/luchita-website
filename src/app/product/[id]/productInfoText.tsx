@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import share from "../../../../public/icons/share.svg";
 import Image from "next/image";
-import { Product } from "@/interfaces";
+import { ProductRecord } from "@/interfaces";
 import { ProductType } from "@/constants";
 
 export default function ProductInfoText({
   product,
 }: {
-  product: Product | undefined;
+  product: ProductRecord | undefined;
 }) {
   const [copySuccess, setCopySuccess] = useState(false);
 

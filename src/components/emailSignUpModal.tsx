@@ -8,9 +8,7 @@ import { motion } from "framer-motion";
 import { createEmailSubscriber } from "@/firebase/firestore";
 
 type EmailSignUpModalProps = {
-  handleCloseModal: (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => void;
+  handleCloseModal: (event: React.MouseEvent) => void;
 };
 
 const animationVariants = {
@@ -169,8 +167,8 @@ export default function EmailSignUpModal({
 
                   <input
                     value="Sign Up"
-                    className=" w-full bg-brandPurple border-brandLime
-            flex items-center justify-center rounded-[20px] h-[48px] border  text-brandLime font-righteous text-lg py-3 mt-8"
+                    className=" w-full
+            flex items-center justify-center rounded-[20px] h-[48px]  bg-brandPurple border-brandLime border  text-brandLime hover:bg-brandLime hover:border-brandPurple hover:text-brandPurple transition-colors font-righteous text-lg pt-2 pb-3 mt-8"
                     type="submit"
                   />
                 </form>

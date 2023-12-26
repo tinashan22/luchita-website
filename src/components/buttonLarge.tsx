@@ -3,12 +3,16 @@ import { ButtonType } from "@/constants";
 interface ButtonProps {
   type: ButtonType;
   btnText: string;
-  handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  disabled?: boolean | undefined;
+  handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  //handleClick2?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function LargeButton({
   type,
   btnText,
+  disabled,
+
   handleClick,
 }: ButtonProps) {
   //   function renderButton() {
@@ -48,29 +52,39 @@ export default function LargeButton({
   return (
     <>
       {/* {renderButton()} */}
-
       <div
-        onClick={handleClick}
         className={`${
-          type === ButtonType.LargePrimary && "bg-brandPurple border-brandLime"
+          type === ButtonType.LargePrimary &&
+          "bg-brandPurple border-brandLime hover:bg-brandLime hover:border-brandPurple transition-colors"
         }
         ${
           type === ButtonType.LargeSecondary &&
-          "bg-brandPink border-brandPurple"
+          "bg-brandPink border-brandPurple hover:bg-brandLime transition-colors"
         }
 
         
             flex items-center justify-center rounded-[20px] h-[48px] border`}
       >
-        <p
-          className={`
-        
-        ${type === ButtonType.LargePrimary && "text-brandLime"}
-          ${type === ButtonType.LargeSecondary && "text-brandPurple"}
-         font-righteous text-lg py-3 `}
+        <button
+          onClick={handleClick}
+          disabled={disabled}
+          className={`w-full ${disabled && "opacity-70"}  `}
         >
-          {btnText}
-        </p>
+          <p
+            className={`
+        ${
+          type === ButtonType.LargePrimary &&
+          "text-brandLime hover:text-brandPurple"
+        }
+          ${
+            type === ButtonType.LargeSecondary &&
+            "text-brandPurple hover:text-brandPurple"
+          }
+         font-righteous text-lg py-3 `}
+          >
+            {btnText}
+          </p>
+        </button>
       </div>
     </>
   );

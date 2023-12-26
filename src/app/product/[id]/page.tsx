@@ -4,23 +4,24 @@ import React, { useEffect, useState } from "react";
 import "swiper/css"; // core Swiper
 import "swiper/css/pagination"; // Pagination module
 import "@/app/globals.css";
-import { Product } from "@/interfaces";
+import { ProductRecord } from "@/interfaces";
 import DesktopProductView from "./desktopProductView";
-import { getProduct } from "@/firebase/firestore";
+import { getProductById } from "@/firebase/firestore";
 import MobileProductView from "./mobileProductView";
 import ProductBreadcrumb from "./breadcrumb";
+import FloatingMenu from "@/components/floatingMenu";
 
 export default function ProductLayout({
   params,
 }: {
-  params: { id: string; product: Product };
+  params: { id: string; product: ProductRecord };
 }) {
-  const [product, setProduct] = useState<Product>();
+  const [product, setProduct] = useState<ProductRecord>();
 
   useEffect(() => {
-    getProduct(params.id).then((data: any) => {
+    getProductById(params.id).then((data: any) => {
       const product = data;
-      const currentProduct: Product = {
+      const currentProduct: ProductRecord = {
         id: product.id,
         name: product.name,
         price: product.price,
@@ -31,6 +32,7 @@ export default function ProductLayout({
         displayOrder: product.displayOrder,
         isDeleted: product.isDeleted,
       };
+
       setProduct(currentProduct);
     });
   }, []);
@@ -46,6 +48,7 @@ export default function ProductLayout({
       <DesktopProductView product={product} />
       {/* mobile product page */}
       <MobileProductView product={product} />
+      <FloatingMenu />
     </div>
   );
 }

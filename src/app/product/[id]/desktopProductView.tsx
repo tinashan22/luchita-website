@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@/interfaces";
+import { ProductRecord } from "@/interfaces";
 import { LargeProductImage } from "./photoContainers";
 import { useRouter } from "next/navigation";
 import LargeButton from "@/components/buttonLarge";
@@ -11,26 +11,43 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { framerLogger } from "@/stateLogger";
 import EmailSignUpModal from "@/components/emailSignUpModal";
+import { useShoppingCart } from "use-shopping-cart";
+import Link from "next/link";
 
 export default function DesktopProductView({
   product,
 }: {
-  product: Product | undefined;
+  product: ProductRecord | undefined;
 }) {
   const router = useRouter();
 
   const [modalShow, setModalShow] = useState(false);
 
-  function handleClickJoinMail(
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) {
+  function handleClickJoinMail(e: React.MouseEvent) {
     e.preventDefault();
     setModalShow(true);
   }
 
+  const { addItem } = useShoppingCart();
+
+  const [cartBtnText, setCartBtnText] = useState("Add to cart");
+
+  const [cartBtnIsDisabled, setCartBtnIsDisabled] = useState(false);
+
+  async function updateBtnState() {
+    setCartBtnText("Added to your cart");
+
+    setCartBtnIsDisabled(true);
+
+    setTimeout(() => {
+      setCartBtnText("Add to cart");
+      setCartBtnIsDisabled(false);
+    }, 1800);
+  }
+
   return (
     <div className="hidden md:block ">
-      <AnimatePresence
+      {/* <AnimatePresence
         // Disable any initial animations on children that
         // are present when the component is first rendered
         initial={false}
@@ -42,15 +59,23 @@ export default function DesktopProductView({
         onExitComplete={() => {
           framerLogger("email modal close");
         }}
-      >
-        {modalShow && (
+      > */}
+      {/* {modalShow && (
           <EmailSignUpModal
             handleCloseModal={() => {
               setModalShow(false);
             }}
           />
-        )}
-      </AnimatePresence>
+        )} */}
+
+      {/* {modalShow && (
+          <EmailSignUpModalWithRoute
+            handleCloseModal={() => {
+              setModalShow(false);
+            }}
+          />
+        )} */}
+      {/* </AnimatePresence> */}
       <div className=" w-1/2 flex flex-col  pb-32">
         {product?.photoList.map((photoUrl, index) => {
           return <LargeProductImage key={index} imageUrl={photoUrl} />;
@@ -71,13 +96,45 @@ export default function DesktopProductView({
           <div className="h-[12px]"></div> */}
 
           <LargeButton
-            key="secondary"
-            type={ButtonType.LargeSecondary}
-            btnText="☞ Join mailing list"
+            key="add to cart"
+            disabled={cartBtnIsDisabled}
+            type={ButtonType.LargePrimary}
+            btnText={cartBtnText}
+            // handleClick={() => {
+            //   handleClickJoinMail(e);
+            // }}
             handleClick={(e) => {
-              handleClickJoinMail(e);
+              addItem(
+                {
+                  // Line item name to be shown on the Stripe Checkout page
+                  name: product!.name,
+                  // Optional description to be shown on the Stripe Checkout page
+                  description: product!.description,
+                  // A unique identifier for this item (stock keeping unit)
+                  sku: product!.id,
+                  // price in smallest currency unit (e.g. cent for USD)
+                  price: product!.price * 100,
+                  currency: "USD",
+                  // Optional image to be shown on the Stripe Checkout page
+                  image: product!.primaryPhoto,
+                },
+                { count: 1 }
+              );
+              updateBtnState();
             }}
           />
+
+          <div className="h-[12px]"></div>
+          <Link href="/signup">
+            <LargeButton
+              key="secondary"
+              type={ButtonType.LargeSecondary}
+              btnText="☞ Join mailing list"
+              handleClick={(e) => {
+                handleClickJoinMail(e);
+              }}
+            />
+          </Link>
         </div>
       </div>
       <FloatingMenu />

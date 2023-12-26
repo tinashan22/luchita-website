@@ -19,7 +19,7 @@ import {
   COLLECTION_PRODUCTS,
   COLLECTION_USERS,
 } from "./firebase_constants";
-import { Product } from "@/interfaces";
+import { ProductRecord } from "@/interfaces";
 
 const firestore = getFirestore(firebase);
 
@@ -53,7 +53,7 @@ export const getCollection = async <T,>(collectionName: string) => {
 
 export const getAllProducts = async () => getCollection(COLLECTION_PRODUCTS);
 
-export const getProduct = async (productId: string) => {
+export const getProductById = async (productId: string) => {
   const docRef = doc(firestore, COLLECTION_PRODUCTS, productId);
   const docSnap = await getDoc(docRef);
 
@@ -69,14 +69,29 @@ export const getProduct = async (productId: string) => {
 export const createUserRecord = async (
   userId: string,
   email: string,
-  displayName: string
+  name: string
 ) => {
   await setDoc(doc(firestore, COLLECTION_USERS, userId), {
     email: email,
     createdAt: Timestamp.now(),
-    displayName: displayName,
+    name: name,
     userId: userId,
+    isDeleted: false,
   });
+};
+
+export const getUserRecordById = async (userId: string) => {
+  const docRef = doc(firestore, COLLECTION_USERS, userId);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    return docSnap.data();
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!", "getUserRecord");
+    return null;
+  }
 };
 
 export const createEmailSubscriber = async (

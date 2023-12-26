@@ -7,10 +7,12 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SmallButton from "./buttonSmall";
 import userIcon from "../../public/icons/user.svg";
 import Image from "next/image";
+import { AuthContext, AuthProvider } from "@/context/authContext";
+import { auth } from "@/firebase/firebase";
 
 const navAnimationVariants = {
   hidden: {
@@ -38,39 +40,72 @@ const navAnimationVariants = {
   },
 };
 
-const logoNavAnimationVariants = {
-  hidden: {
-    x: "-100px",
-    opacity: 0.2,
-  },
-  visible: {
-    x: "0px",
-    opacity: 1,
-    transition: {
-      duration: 0.2,
-      type: "spring",
-      damping: 15,
-      stiffness: 100,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.2,
-      ease: "easeOut",
-    },
-  },
-};
+const isMobile = window.innerWidth < 480;
+const logoNavAnimationVariants = isMobile
+  ? {
+      hidden: {
+        x: "-30vw",
+        opacity: 0.2,
+      },
+      visible: {
+        x: "0px",
+        opacity: 1,
+        transition: {
+          duration: 0.2,
+          type: "spring",
+          damping: 15,
+          stiffness: 100,
+        },
+      },
+      exit: {
+        opacity: 0,
+        transition: {
+          duration: 0.2,
+          ease: "easeOut",
+        },
+      },
+    }
+  : {
+      hidden: {
+        x: "-30vw",
+        opacity: 0.2,
+      },
+      visible: {
+        x: "0px",
+        opacity: 1,
+        transition: {
+          duration: 0.6,
+          type: "spring",
+          damping: 15,
+          stiffness: 100,
+        },
+      },
+      exit: {
+        opacity: 0,
+        transition: {
+          duration: 0.2,
+          ease: "easeOut",
+        },
+      },
+    };
 
-export default function MobileNav() {
-  const [isUserLoggedIn, setUserLoggedIn] = useState(true);
+export default function GlobalNav() {
+  //log in status
+  const [isUserLoggedIn, setUserLoggedIn] = useState(false);
+  const { authUser, currentUserRecord } = useContext(AuthContext);
+
+  useEffect(() => {
+    setUserLoggedIn(authUser != null);
+    console.log("nav use effect update", authUser);
+    return setUserLoggedIn(authUser != null);
+  }, [authUser]);
 
   //nav animation
   const { scrollY } = useScroll();
   const [isTopOfPage, setTopOfPage] = useState(true);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 20) {
+    if (latest > 30) {
       setTopOfPage(false);
     } else {
       setTopOfPage(true);
@@ -79,7 +114,7 @@ export default function MobileNav() {
   return (
     <motion.div>
       <div className="bg-brandLime h-14 min-w-full top-0 fixed flex items-center justify-center border-b border-brandPurple z-10 selection:bg-brandCream">
-        {true && (
+        {isTopOfPage && (
           <motion.div
             variants={logoNavAnimationVariants}
             initial="hidden"
@@ -94,43 +129,47 @@ export default function MobileNav() {
           </motion.div>
         )}
         {/* beginning of login button */}
-        {/* {!isTopOfPage && (
+        {!isTopOfPage && (
           <motion.div
             variants={navAnimationVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="flex items-center justify-between w-full px-5"
+            className="flex items-center justify-between w-full px-5 md:px-20"
           >
             <Link href="/">
               <p className={`font-righteous text-xl text-brandPurple`}>
                 Lucha Luchita
               </p>
             </Link>
-            <Link href="/account">
-            <div>
-                <Image
-                  className="h-[24px]"
-                  src={userIcon}
-                  alt="icon for user account page"
-                />
-              </div>
-            </Link>
-            {isUserLoggedIn ? (
+
+            {/* <Link href={authUser != null ? "/profile" : "/createAccount"}>
               <div>
                 <Image
                   className="h-[24px]"
                   src={userIcon}
                   alt="icon for user account page"
                 />
+                {authUser?.toString() || "IS NULL"}
+              </div>
+            </Link> */}
+            {authUser != null ? (
+              <div>
+                <Link href="/profile">
+                  <Image
+                    className="h-[24px]"
+                    src={userIcon}
+                    alt="icon for user account page"
+                  />
+                </Link>
               </div>
             ) : (
-              <Link href="/account">
+              <Link href="/login">
                 <SmallButton btnText="log in" />
               </Link>
             )}
           </motion.div>
-        )} */}
+        )}
 
         {/* end of login */}
       </div>
