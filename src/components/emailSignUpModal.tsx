@@ -34,7 +34,7 @@ const animationVariants = {
     y: "400px",
     x: "200px",
     transition: {
-      duration: 0.3,
+      duration: 0.15,
       ease: "easeOut",
     },
   },

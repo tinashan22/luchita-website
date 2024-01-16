@@ -47,7 +47,7 @@ export default function DesktopProductView({
 
   return (
     <div className="hidden md:block ">
-      {/* <AnimatePresence
+      <AnimatePresence
         // Disable any initial animations on children that
         // are present when the component is first rendered
         initial={false}
@@ -59,23 +59,15 @@ export default function DesktopProductView({
         onExitComplete={() => {
           framerLogger("email modal close");
         }}
-      > */}
-      {/* {modalShow && (
+      >
+        {modalShow && (
           <EmailSignUpModal
             handleCloseModal={() => {
               setModalShow(false);
             }}
           />
-        )} */}
-
-      {/* {modalShow && (
-          <EmailSignUpModalWithRoute
-            handleCloseModal={() => {
-              setModalShow(false);
-            }}
-          />
-        )} */}
-      {/* </AnimatePresence> */}
+        )}
+      </AnimatePresence>
       <div className=" w-1/2 flex flex-col  pb-32">
         {product?.photoList.map((photoUrl, index) => {
           return <LargeProductImage key={index} imageUrl={photoUrl} />;
