@@ -27,7 +27,10 @@ const garamond = EB_Garamond({
 });
 
 export const metadata = {
-  title: "Lucha Luchita Website",
+  title: {
+    default: "Shop Lucha Luchita",
+    template: "%s | Lucha Luchita",
+  },
   description:
     "E-commerce webshop for earrings and customized accesories, for non-binary queer people. Stock and commission avaialble. Instagram: @Lucha.Luchita. Website by Tina Shan",
 };
